@@ -71,17 +71,6 @@ h1, h2, h3, p { margin: 0; }
 .hero .intro {
   margin: 26px auto 0; max-width: 46ch; font-size: .98rem; color: rgba(235,233,229,.82);
 }
-.hero-albums {
-  position: absolute; z-index: 2; left: 0; right: 0; bottom: 34px;
-  display: flex; justify-content: center; gap: clamp(14px, 2.4vw, 26px); padding: 0 var(--pad);
-}
-.dot {
-  width: clamp(58px, 9vw, 88px); aspect-ratio: 1; border-radius: 50%; overflow: hidden;
-  border: 2px solid rgba(235,233,229,.55); background: var(--panel);
-  transition: border-color .25s, transform .25s;
-}
-.dot:hover { border-color: #fff; transform: translateY(-4px); }
-.dot img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ---------- Szekciók ---------- */
 .section { padding: clamp(72px, 11vw, 140px) var(--pad); }
@@ -183,7 +172,6 @@ body.lb-open { overflow: hidden; }
   .site-header { height: 64px; }
   .brand { font-size: .8rem; letter-spacing: .16em; }
   .nav { font-size: .82rem; gap: 14px; }
-  .hero-albums { bottom: 24px; }
   .lb-prev, .lb-next { display: none; }   /* telefonon húzással lapozunk */
   .album-head { padding-top: calc(64px + 40px); }
 }

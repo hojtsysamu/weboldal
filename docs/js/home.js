@@ -36,34 +36,30 @@
   let featured = all.filter((x) => x.photo.featured);
   if (!featured.length) featured = albums.map((a) => all.find((x) => x.slug === a.slug && x.photo.id === a.cover)).filter(Boolean);
 
-  /* --- nyitókép: a kiemeltek közül az, ami a legjobban illik a képernyő formájához --- */
+  /* --- nyitókép: fix kép (originals/hero.jpg); ha nincs, az első kiemelt kép --- */
   const hero = document.getElementById("hero");
   let heroItem = null;
-  if (featured.length) {
-    const winAR = window.innerWidth / window.innerHeight;
-    heroItem = [...featured].sort(
-      (a, b) => Math.abs(a.photo.w / a.photo.h - winAR) - Math.abs(b.photo.w / b.photo.h - winAR)
-    )[0];
-    const img = el("img", {
+  let img = null;
+  if (data.hero) {
+    const sz = data.hero.sizes;
+    const pick = sz.find((w) => w >= 1800) || sz[sz.length - 1];
+    img = el("img", {
+      class: "hero-img", alt: "", decoding: "async", fetchpriority: "high",
+      srcset: sz.map((w) => `hero/hero-${w}.webp ${w}w`).join(", "), sizes: "100vw",
+      src: `hero/hero-${pick}.webp`,
+    });
+  } else if (featured.length) {
+    heroItem = featured[0];
+    img = el("img", {
       class: "hero-img", alt: "", decoding: "async", fetchpriority: "high",
       srcset: photoSrcset(heroItem.slug, heroItem.photo), sizes: "100vw",
       src: photoSrc(heroItem.slug, heroItem.photo, bestSize(heroItem.photo, 1800)),
     });
+  }
+  if (img) {
     hero.prepend(img);
     fadeImage(img);
   }
-
-  /* --- kerek albumindexképek a nyitókép alján --- */
-  const dots = document.getElementById("hero-albums");
-  albums.slice(0, 5).forEach((a) => {
-    const cover = a.photos.find((p) => p.id === a.cover) || a.photos[0];
-    const img = fadeImage(el("img", {
-      alt: "", loading: "lazy", srcset: photoSrcset(a.slug, cover), sizes: "90px",
-      src: photoSrc(a.slug, cover, bestSize(cover, 200)),
-    }));
-    img.classList.add("loaded");
-    dots.append(el("a", { class: "dot", href: `album.html?a=${a.slug}`, title: a.title, "aria-label": a.title }, img));
-  });
 
   /* --- kiemelt képek --- */
   const featSection = document.getElementById("kiemelt");

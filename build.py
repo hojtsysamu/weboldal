@@ -27,6 +27,7 @@ ROOT = Path(__file__).resolve().parent
 SRC = ROOT / "originals"
 OUT = ROOT / "docs" / "photos"
 JSON_PATH = ROOT / "docs" / "albums.json"
+HERO_OUT = ROOT / "docs" / "hero"
 
 WIDTHS = [480, 800, 1200, 1800, 2400]   # ezekben a szélességekben készülnek a képek
 QUALITY = 82                            # WebP minőség (75-90 között érdemes)
@@ -181,6 +182,33 @@ def build_album(folder: Path):
     }
 
 
+def build_hero():
+    """A nyitóoldal fix háttérképe: originals/hero.jpg (vagy .png, .webp ...)."""
+    src = next((f for f in sorted(SRC.iterdir())
+                if f.is_file() and f.stem.lower() == "hero" and f.suffix.lower() in EXTENSIONS), None)
+    if src is None:
+        if HERO_OUT.is_dir():
+            import shutil
+            shutil.rmtree(HERO_OUT)
+        return None
+    with Image.open(src) as probe:
+        width, height = oriented_size(probe)
+    sizes = sizes_for(width)
+    HERO_OUT.mkdir(parents=True, exist_ok=True)
+    todo = []
+    for w in sizes:
+        target = HERO_OUT / f"hero-{w}.webp"
+        if FORCE or not target.exists() or target.stat().st_mtime < src.stat().st_mtime:
+            todo.append((w, target))
+    if todo:
+        img = load_prepared(src)
+        for w, target in todo:
+            resized = img if w == img.width else img.resize((w, round(w * img.height / img.width)), Image.LANCZOS)
+            resized.save(target, "WEBP", quality=QUALITY, method=6)
+        print(f"  + nyitókép: {src.name}  ({len(todo)} új méret)")
+    return {"sizes": sizes, "w": width, "h": height}
+
+
 def main():
     if not SRC.is_dir():
         sys.exit("Nem találom az originals/ mappát. A build.py mellett kell lennie.")
@@ -208,7 +236,8 @@ def main():
                 print(f"Album törölve a weboldalról: {d.name}")
 
     JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
-    JSON_PATH.write_text(json.dumps({"albums": albums}, ensure_ascii=False, indent=1), encoding="utf-8")
+    hero = build_hero()
+    JSON_PATH.write_text(json.dumps({"hero": hero, "albums": albums}, ensure_ascii=False, indent=1), encoding="utf-8")
 
     total = sum(len(a["photos"]) for a in albums)
     print(f"\nKész: {len(albums)} album, {total} kép -> docs/albums.json")
