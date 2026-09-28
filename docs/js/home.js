@@ -11,7 +11,7 @@
   const albums = data.albums || [];
 
   /* --- szövegek --- */
-  const name = site.name || "Fotográfus";
+  const name = site.name || "Photographer";
   document.title = site.tagline ? `${name} – ${site.tagline}` : name;
   document.querySelectorAll("[data-name]").forEach((n) => (n.textContent = name));
   document.getElementById("tagline").textContent = site.tagline || "";
@@ -77,7 +77,7 @@
   const grid = document.getElementById("albums-grid");
   if (!albums.length) {
     grid.replaceWith(el("p", { class: "message",
-      text: "Még nincs feltöltött album. Másold a képeket az originals mappába (albumonként egy almappába), futtasd le a python build.py parancsot, és frissítsd az oldalt." }));
+      text: "No albums yet. Copy your photos into the originals folder (one subfolder per album), run python build.py, and refresh the page." }));
   }
   albums.forEach((a) => {
     const cover = a.photos.find((p) => p.id === a.cover) || a.photos[0];
@@ -88,7 +88,7 @@
     }));
     const label = el("div", { class: "label" },
       el("div", { class: "name", text: a.title }),
-      el("div", { class: "count", text: `${a.photos.length} kép` }));
+      el("div", { class: "count", text: `${a.photos.length} ${a.photos.length === 1 ? "photo" : "photos"}` }));
     grid.append(el("a", { class: "album-card", href: `album.html?a=${a.slug}` }, img, label));
   });
 })();

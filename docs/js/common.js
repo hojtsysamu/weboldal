@@ -91,7 +91,7 @@ function renderJustified(container, items, opts = {}) {
         src: photoSrc(it.slug, it.photo, bestSize(it.photo, 800)),
       })
     );
-    const btn = el("button", { class: "ph", type: "button", "aria-label": "Kép megnyitása" }, img);
+    const btn = el("button", { class: "ph", type: "button", "aria-label": "Open photo" }, img);
     btn.addEventListener("click", () => opts.onOpen && opts.onOpen(index));
     return { btn, img };
   });

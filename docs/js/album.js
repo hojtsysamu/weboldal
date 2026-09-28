@@ -10,7 +10,7 @@
     getJSON("albums.json").catch(() => ({ albums: [] })),
   ]);
   const albums = data.albums || [];
-  const name = site.name || "Fotográfus";
+  const name = site.name || "Photographer";
   document.querySelectorAll("[data-name]").forEach((n) => (n.textContent = name));
   document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -19,9 +19,9 @@
 
   if (idx < 0) {
     document.title = name;
-    document.getElementById("album-title").textContent = "Az album nem található";
-    body.append(el("p", { class: "message" }, "Ez az album nem létezik. ",
-      el("a", { href: "index.html#albumok", text: "Vissza az albumokhoz" })));
+    document.getElementById("album-title").textContent = "Album not found";
+    body.append(el("p", { class: "message" }, "This album does not exist. ",
+      el("a", { href: "index.html#albumok", text: "Back to albums" })));
     return;
   }
 
@@ -30,7 +30,7 @@
   document.getElementById("album-title").textContent = album.title;
   const desc = document.getElementById("album-desc");
   if (album.description) desc.textContent = album.description; else desc.hidden = true;
-  document.getElementById("album-meta").textContent = `${album.photos.length} kép`;
+  document.getElementById("album-meta").textContent = `${album.photos.length} ${album.photos.length === 1 ? "photo" : "photos"}`;
 
   const items = album.photos.map((p) => ({ slug: album.slug, photo: p }));
   const grid = el("div");

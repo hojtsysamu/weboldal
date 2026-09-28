@@ -3,10 +3,10 @@
 function createLightbox() {
   const img = el("img", { class: "lb-img", alt: "" });
   const count = el("div", { class: "lb-count" });
-  const close = el("button", { class: "lb-close", type: "button", "aria-label": "Bezárás", text: "×" });
-  const prev = el("button", { class: "lb-prev", type: "button", "aria-label": "Előző kép", text: "‹" });
-  const next = el("button", { class: "lb-next", type: "button", "aria-label": "Következő kép", text: "›" });
-  const root = el("div", { class: "lb", role: "dialog", "aria-modal": "true", "aria-label": "Képnézegető" },
+  const close = el("button", { class: "lb-close", type: "button", "aria-label": "Close", text: "×" });
+  const prev = el("button", { class: "lb-prev", type: "button", "aria-label": "Previous photo", text: "‹" });
+  const next = el("button", { class: "lb-next", type: "button", "aria-label": "Next photo", text: "›" });
+  const root = el("div", { class: "lb", role: "dialog", "aria-modal": "true", "aria-label": "Photo viewer" },
     img, close, prev, next, count);
   document.body.append(root);
 
