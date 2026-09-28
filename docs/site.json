@@ -1,11 +1,14 @@
 {
-  "name": "A Te Neved",
-  "tagline": "Fotográfus",
+  "name": "Hojtsy Samu",
+  "tagline": "Photographer",
   "intro": "Portré, koncert és utazás – pillanatok, ahogy történnek.",
   "about": [
-    "Ide írj két-három mondatot magadról: mióta fotózol, mit szeretsz a legjobban, mi fog meg a képeken.",
-    "Egy második bekezdés is jöhet: hogyan dolgozol, kiknek fotóztál már, hol találnak meg."
-  ],
+    "Photographer based in Budapest, Hungary.
+
+I work across fashion, portrait and editorial photography, with a focus on visual storytelling, atmosphere and contemporary aesthetics.
+
+My work explores the relationship between people, fashion and their surroundings.",
+    
   "email": "nev@email.hu",
   "instagram": "https://instagram.com/felhasznalonev"
 }
