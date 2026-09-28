@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#111111">
+  <title>Album</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23ebe9e5' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="solid">
+  <header class="site-header">
+    <a class="brand" href="index.html" data-name>Fotográfus</a>
+    <nav class="nav" aria-label="Főmenü">
+      <a href="index.html#albumok">Albumok</a>
+      <a href="index.html#rolam">Rólam</a>
+      <a href="index.html#kapcsolat">Kapcsolat</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="album-head">
+      <h1 id="album-title"></h1>
+      <p id="album-desc"></p>
+      <p class="meta" id="album-meta"></p>
+    </div>
+    <div class="album-body" id="album-body"></div>
+  </main>
+
+  <nav class="album-nav" id="album-nav" aria-label="Albumok között"></nav>
+  <footer class="site-footer">© <span id="year"></span> <span data-name></span></footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/lightbox.js"></script>
+  <script src="js/album.js"></script>
+</body>
+</html>

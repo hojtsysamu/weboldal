@@ -1,0 +1,193 @@
+:root {
+  --bg: #111111;
+  --panel: #1a1a1a;
+  --text: #ebe9e5;
+  --muted: #8e8b86;
+  --line: #2b2b2b;
+  --pad: clamp(20px, 4vw, 56px);
+  --font: "Jost", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+h1, h2, h3, p { margin: 0; }
+
+/* ---------- Fejléc ---------- */
+.site-header {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  height: 76px; padding: 0 var(--pad);
+  transition: background .3s;
+}
+.site-header.scrolled, body.solid .site-header {
+  background: rgba(17, 17, 17, .88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.brand {
+  font-size: .95rem; font-weight: 400; letter-spacing: .22em; text-transform: uppercase;
+}
+.nav { display: flex; gap: clamp(16px, 3vw, 40px); font-size: .9rem; letter-spacing: .08em; }
+.nav a { padding: 4px 0; border-bottom: 1px solid transparent; transition: border-color .2s; }
+.nav a:hover { border-color: var(--text); }
+
+/* ---------- Nyitókép ---------- */
+.hero {
+  position: relative; height: 100vh; height: 100svh; min-height: 540px;
+  display: grid; place-items: center; text-align: center; overflow: hidden;
+  background: var(--panel);
+}
+.hero-img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity 1.4s ease;
+}
+.hero-img.loaded { opacity: 1; }
+.hero::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(17,17,17,.6), rgba(17,17,17,.2) 38%, rgba(17,17,17,.2) 60%, rgba(17,17,17,.85));
+}
+.hero-text { position: relative; z-index: 2; padding: 0 var(--pad); }
+.hero h1 {
+  font-size: clamp(2rem, 6.4vw, 4.6rem); font-weight: 200;
+  letter-spacing: .3em; text-indent: .3em; text-transform: uppercase; line-height: 1.15;
+}
+.hero .tagline {
+  margin-top: 18px; font-size: clamp(.95rem, 1.6vw, 1.15rem); letter-spacing: .34em; text-indent: .34em;
+}
+.hero .intro {
+  margin: 26px auto 0; max-width: 46ch; font-size: .98rem; color: rgba(235,233,229,.82);
+}
+.hero-albums {
+  position: absolute; z-index: 2; left: 0; right: 0; bottom: 34px;
+  display: flex; justify-content: center; gap: clamp(14px, 2.4vw, 26px); padding: 0 var(--pad);
+}
+.dot {
+  width: clamp(58px, 9vw, 88px); aspect-ratio: 1; border-radius: 50%; overflow: hidden;
+  border: 2px solid rgba(235,233,229,.55); background: var(--panel);
+  transition: border-color .25s, transform .25s;
+}
+.dot:hover { border-color: #fff; transform: translateY(-4px); }
+.dot img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Szekciók ---------- */
+.section { padding: clamp(72px, 11vw, 140px) var(--pad); }
+.wrap { max-width: 1400px; margin: 0 auto; }
+.section-title {
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 300; letter-spacing: .06em; margin-bottom: 36px;
+}
+.about { border-top: 1px solid var(--line); }
+.about .text { max-width: 62ch; color: rgba(235,233,229,.85); }
+.about .text p + p { margin-top: 1.1em; }
+
+/* ---------- Album kártyák ---------- */
+.albums-grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+}
+.album-card {
+  position: relative; display: block; aspect-ratio: 3 / 4; overflow: hidden; background: var(--panel);
+}
+.album-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s; }
+.album-card img.loaded { opacity: 1; }
+.album-card::after {
+  content: ""; position: absolute; inset: 0; background: rgba(17,17,17,.38); transition: background .3s;
+}
+.album-card:hover::after { background: rgba(17,17,17,.12); }
+.album-card .label {
+  position: absolute; z-index: 2; inset: 0; display: grid; place-content: center; text-align: center; padding: 20px;
+}
+.album-card .name {
+  font-size: clamp(1.1rem, 1.7vw, 1.4rem); font-weight: 300; letter-spacing: .22em; text-indent: .22em;
+  text-transform: uppercase; line-height: 1.35;
+}
+.album-card .count { margin-top: 10px; font-size: .85rem; letter-spacing: .1em; color: rgba(235,233,229,.8); }
+
+/* ---------- Kapcsolat ---------- */
+.contact { border-top: 1px solid var(--line); }
+.contact .mail {
+  display: inline-block; font-size: clamp(1.5rem, 4vw, 2.8rem); font-weight: 200; letter-spacing: .03em;
+  border-bottom: 1px solid var(--muted); padding-bottom: 4px; transition: border-color .2s;
+  overflow-wrap: anywhere;
+}
+.contact .mail:hover { border-color: var(--text); }
+.contact .social { margin-top: 26px; color: var(--muted); }
+.contact .social a:hover { color: var(--text); }
+.site-footer {
+  padding: 28px var(--pad) 40px; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line);
+}
+
+/* ---------- Album oldal ---------- */
+.album-head { padding: calc(76px + clamp(40px, 8vw, 100px)) var(--pad) clamp(28px, 5vw, 56px); }
+.album-head h1 {
+  font-size: clamp(1.8rem, 5vw, 3.4rem); font-weight: 200; letter-spacing: .2em; text-transform: uppercase; line-height: 1.2;
+}
+.album-head p { margin-top: 18px; max-width: 58ch; color: rgba(235,233,229,.8); }
+.album-head .meta { color: var(--muted); font-size: .9rem; margin-top: 10px; }
+.album-body { padding: 0 var(--pad) clamp(56px, 9vw, 110px); }
+.album-nav {
+  display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  padding: 28px var(--pad); border-top: 1px solid var(--line);
+}
+.album-nav a { letter-spacing: .06em; color: var(--muted); transition: color .2s; }
+.album-nav a:hover { color: var(--text); }
+.message { padding: 40px 0; color: var(--muted); max-width: 60ch; }
+.message a { color: var(--text); border-bottom: 1px solid var(--muted); }
+
+/* ---------- Igazított fotórács ---------- */
+.justified { display: flex; flex-direction: column; }
+.justified .row { display: flex; }
+.ph {
+  position: relative; flex: none; overflow: hidden; padding: 0; border: 0; background: var(--panel);
+  cursor: zoom-in; display: block;
+}
+.ph img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s, filter .3s; }
+.ph img.loaded { opacity: 1; }
+.ph:hover img.loaded { filter: brightness(1.12); }
+
+/* ---------- Lightbox ---------- */
+.lb {
+  position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center;
+  background: rgba(8, 8, 8, .97); opacity: 0; visibility: hidden; transition: opacity .25s, visibility .25s;
+}
+.lb.open { opacity: 1; visibility: visible; }
+.lb-img { max-width: 96vw; max-height: 90vh; object-fit: contain; user-select: none; -webkit-user-drag: none; }
+.lb button {
+  position: absolute; background: none; border: 0; color: var(--text); cursor: pointer;
+  font: inherit; font-size: 2.2rem; line-height: 1; padding: 14px 18px; opacity: .75; transition: opacity .2s;
+}
+.lb button:hover { opacity: 1; }
+.lb-close { top: 8px; right: 8px; }
+.lb-prev { left: 4px; top: 50%; transform: translateY(-50%); }
+.lb-next { right: 4px; top: 50%; transform: translateY(-50%); }
+.lb-count {
+  position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; font-size: .85rem;
+  letter-spacing: .12em; color: var(--muted);
+}
+body.lb-open { overflow: hidden; }
+
+@media (max-width: 640px) {
+  .site-header { height: 64px; }
+  .brand { font-size: .8rem; letter-spacing: .16em; }
+  .nav { font-size: .82rem; gap: 14px; }
+  .hero-albums { bottom: 24px; }
+  .lb-prev, .lb-next { display: none; }   /* telefonon húzással lapozunk */
+  .album-head { padding-top: calc(64px + 40px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition-duration: .01ms !important; }
+}

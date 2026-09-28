@@ -1,0 +1,5 @@
+# Az eredeti, nagy fényképek NEM kerülnek fel GitHubra
+originals/
+__pycache__/
+.DS_Store
+Thumbs.db
