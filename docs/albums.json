@@ -12,9 +12,225 @@
  },
  "albums": [
   {
+   "slug": "melankolia-band",
+   "title": "Melankolia band",
+   "description": "Ide jöhet egy-két mondat az albumról.",
+   "cover": "dsc-0783",
+   "photos": [
+    {
+     "id": "dsc-0783",
+     "w": 4536,
+     "h": 3004,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0787",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0802",
+     "w": 4838,
+     "h": 3204,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0809",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0812",
+     "w": 2937,
+     "h": 4434,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0814",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0832",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0838",
+     "w": 2990,
+     "h": 4514,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0853",
+     "w": 4928,
+     "h": 3264,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0886",
+     "w": 4681,
+     "h": 3100,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0892",
+     "w": 4681,
+     "h": 3100,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0898",
+     "w": 4839,
+     "h": 3205,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0916",
+     "w": 3151,
+     "h": 4757,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0962",
+     "w": 4250,
+     "h": 2815,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0992",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0996",
+     "w": 3041,
+     "h": 4592,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    }
+   ]
+  },
+  {
    "slug": "tokoli-drift",
-   "title": "Tokoli Drift",
-   "description": "",
+   "title": "Tököli drift",
+   "description": "Ide jöhet egy-két mondat az albumról.",
    "cover": "dsc-0154",
    "photos": [
     {
