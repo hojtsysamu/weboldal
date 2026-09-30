@@ -91,4 +91,14 @@
       el("div", { class: "count", text: `${a.photos.length} ${a.photos.length === 1 ? "photo" : "photos"}` }));
     grid.append(el("a", { class: "album-card", href: `album.html?a=${a.slug}` }, img, label));
   });
+
+  /* Ha az albumoldalról jöttünk (index.html#rolam stb.), a tartalom csak most töltődött be,
+     ezért a böngésző elsőre rossz helyre görgetett: itt újra a jó szekcióhoz ugrunk. */
+  const jumpToHash = () => {
+    if (!location.hash) return;
+    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (target) target.scrollIntoView({ behavior: "instant", block: "start" });
+  };
+  requestAnimationFrame(() => requestAnimationFrame(jumpToHash));
+  window.addEventListener("load", jumpToHash);
 })();
