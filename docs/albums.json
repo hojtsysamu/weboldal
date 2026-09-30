@@ -189,6 +189,498 @@
    ]
   },
   {
+   "slug": "noxera-szabad",
+   "title": "Clothing brand noxera",
+   "description": "Ide jöhet egy-két mondat az albumról.",
+   "cover": "dsc-0125",
+   "photos": [
+    {
+     "id": "dsc-0010",
+     "w": 3172,
+     "h": 4789,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0016",
+     "w": 3172,
+     "h": 4789,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0027",
+     "w": 3081,
+     "h": 4652,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0034",
+     "w": 2849,
+     "h": 4301,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0062",
+     "w": 4702,
+     "h": 3114,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0073",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0100",
+     "w": 3087,
+     "h": 4660,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0106",
+     "w": 4715,
+     "h": 3123,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0113",
+     "w": 3123,
+     "h": 4715,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0123",
+     "w": 4801,
+     "h": 3180,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0125",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0135",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0217",
+     "w": 2757,
+     "h": 4163,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0221",
+     "w": 2629,
+     "h": 3970,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    }
+   ]
+  },
+  {
+   "slug": "jaguar-shoot",
+   "title": "Jaguar XK-8",
+   "description": "Ide jöhet egy-két mondat az albumról.",
+   "cover": "dsc-0233",
+   "photos": [
+    {
+     "id": "dsc-0233",
+     "w": 2998,
+     "h": 4527,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0238-edit-2",
+     "w": 4777,
+     "h": 3164,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0242",
+     "w": 4713,
+     "h": 3122,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0244",
+     "w": 4528,
+     "h": 2999,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0259",
+     "w": 4819,
+     "h": 3192,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0268",
+     "w": 4632,
+     "h": 3068,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0280",
+     "w": 2979,
+     "h": 4497,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0284",
+     "w": 4789,
+     "h": 3172,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0291",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0305",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0319-edit",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0321",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0325",
+     "w": 4348,
+     "h": 2880,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    }
+   ]
+  },
+  {
+   "slug": "miata-shoot",
+   "title": "Mazda MX-5 Miata",
+   "description": "Ide jöhet egy-két mondat az albumról.",
+   "cover": "dsc-0346",
+   "photos": [
+    {
+     "id": "dsc-0336",
+     "w": 3024,
+     "h": 4565,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0337",
+     "w": 4565,
+     "h": 3024,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0346",
+     "w": 3059,
+     "h": 4619,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0347",
+     "w": 4318,
+     "h": 2860,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0359",
+     "w": 4345,
+     "h": 2878,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0372",
+     "w": 3168,
+     "h": 4783,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0378",
+     "w": 2943,
+     "h": 4444,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0405",
+     "w": 4818,
+     "h": 3191,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0441",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    }
+   ]
+  },
+  {
    "slug": "melankolia-band",
    "title": "Melankolia bandit",
    "description": "Ide jöhet egy-két mondat az albumról.",
