@@ -12,10 +12,187 @@
  },
  "albums": [
   {
-   "slug": "melankolia-band",
-   "title": "Melankolia band",
+   "slug": "noxera-studio",
+   "title": "Clothing brand Noxera",
    "description": "Ide jöhet egy-két mondat az albumról.",
-   "cover": "dsc-0783",
+   "cover": "dsc-0599-edit",
+   "photos": [
+    {
+     "id": "dsc-0599-edit",
+     "w": 2559,
+     "h": 3863,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0602-edit",
+     "w": 2935,
+     "h": 4431,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0608-edit",
+     "w": 3146,
+     "h": 4750,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0613-edit",
+     "w": 2752,
+     "h": 4155,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0617-edit",
+     "w": 2504,
+     "h": 3781,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0619",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0629-edit",
+     "w": 2543,
+     "h": 3840,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0631",
+     "w": 3057,
+     "h": 4615,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0699",
+     "w": 2802,
+     "h": 4231,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0705",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0751-edit",
+     "w": 3036,
+     "h": 4584,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0758-edit",
+     "w": 3008,
+     "h": 4541,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0763-edit",
+     "w": 3173,
+     "h": 4790,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    }
+   ]
+  },
+  {
+   "slug": "melankolia-band",
+   "title": "Melankolia bandit",
+   "description": "Ide jöhet egy-két mondat az albumról.",
+   "cover": "dsc-0809",
    "photos": [
     {
      "id": "dsc-0783",
@@ -187,9 +364,48 @@
      "featured": false
     },
     {
+     "id": "dsc-0938",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0941",
+     "w": 4928,
+     "h": 3264,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
      "id": "dsc-0962",
      "w": 4250,
      "h": 2815,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0973",
+     "w": 4245,
+     "h": 2812,
      "sizes": [
       480,
       800,
