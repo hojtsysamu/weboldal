@@ -681,8 +681,146 @@
    ]
   },
   {
+   "slug": "elektra-band",
+   "title": "Melankolia band",
+   "description": "Ide jöhet egy-két mondat az albumról.",
+   "cover": "dsc06848",
+   "photos": [
+    {
+     "id": "dsc06848",
+     "w": 3550,
+     "h": 5325,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc06880",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc06896",
+     "w": 3746,
+     "h": 5619,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc06987",
+     "w": 5481,
+     "h": 3654,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc07004",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc07020",
+     "w": 6000,
+     "h": 4000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc07054",
+     "w": 6000,
+     "h": 4000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc07233",
+     "w": 2667,
+     "h": 4000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc07273-edit-2",
+     "w": 3700,
+     "h": 2467,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc07378",
+     "w": 6000,
+     "h": 4000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    }
+   ]
+  },
+  {
    "slug": "melankolia-band",
-   "title": "Melankolia bandit",
+   "title": "Melankolia band",
    "description": "Ide jöhet egy-két mondat az albumról.",
    "cover": "dsc-0809",
    "photos": [
