@@ -379,6 +379,144 @@
    ]
   },
   {
+   "slug": "elektra-band",
+   "title": "Elektra band",
+   "description": "Ide jöhet egy-két mondat az albumról.",
+   "cover": "dsc07004",
+   "photos": [
+    {
+     "id": "dsc06848",
+     "w": 3550,
+     "h": 5325,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc06880",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc06896",
+     "w": 3746,
+     "h": 5619,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc06987",
+     "w": 5481,
+     "h": 3654,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc07004",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc07020",
+     "w": 6000,
+     "h": 4000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc07054",
+     "w": 6000,
+     "h": 4000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc07233",
+     "w": 2667,
+     "h": 4000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc07273-edit-2",
+     "w": 3700,
+     "h": 2467,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc07378",
+     "w": 6000,
+     "h": 4000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    }
+   ]
+  },
+  {
    "slug": "jaguar-shoot",
    "title": "Jaguar XK-8",
    "description": "Ide jöhet egy-két mondat az albumról.",
@@ -556,6 +694,131 @@
    ]
   },
   {
+   "slug": "2020-korok",
+   "title": "Korok bemutatása 3/3",
+   "description": "Ide jöhet egy-két mondat az albumról.",
+   "cover": "2000svogue-2",
+   "photos": [
+    {
+     "id": "2000svogue-2",
+     "w": 5400,
+     "h": 7200,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09410",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09412-edit",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09427",
+     "w": 2990,
+     "h": 4485,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09431",
+     "w": 3585,
+     "h": 5377,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09463-edit",
+     "w": 3951,
+     "h": 2634,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09473-edit",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09475-edit",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09485-edit",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    }
+   ]
+  },
+  {
    "slug": "miata-shoot",
    "title": "Mazda MX-5 Miata",
    "description": "Ide jöhet egy-két mondat az albumról.",
@@ -669,144 +932,6 @@
      "id": "dsc-0441",
      "w": 3264,
      "h": 4928,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    }
-   ]
-  },
-  {
-   "slug": "elektra-band",
-   "title": "Melankolia band",
-   "description": "Ide jöhet egy-két mondat az albumról.",
-   "cover": "dsc06848",
-   "photos": [
-    {
-     "id": "dsc06848",
-     "w": 3550,
-     "h": 5325,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc06880",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc06896",
-     "w": 3746,
-     "h": 5619,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc06987",
-     "w": 5481,
-     "h": 3654,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc07004",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc07020",
-     "w": 6000,
-     "h": 4000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc07054",
-     "w": 6000,
-     "h": 4000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc07233",
-     "w": 2667,
-     "h": 4000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc07273-edit-2",
-     "w": 3700,
-     "h": 2467,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc07378",
-     "w": 6000,
-     "h": 4000,
      "sizes": [
       480,
       800,
