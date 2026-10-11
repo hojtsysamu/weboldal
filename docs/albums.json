@@ -694,7 +694,184 @@
    ]
   },
   {
-   "slug": "2020-korok",
+   "slug": "korok-80as",
+   "title": "Korok bemutatása 3/2",
+   "description": "Ide jöhet egy-két mondat az albumról.",
+   "cover": "dsc09707",
+   "photos": [
+    {
+     "id": "dsc09673",
+     "w": 6000,
+     "h": 4000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09684",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09689",
+     "w": 3203,
+     "h": 4805,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09694",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09700",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09703",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09707",
+     "w": 3394,
+     "h": 5091,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09723",
+     "w": 2927,
+     "h": 4390,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09728",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09731",
+     "w": 3515,
+     "h": 5273,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09734",
+     "w": 3377,
+     "h": 5065,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09746",
+     "w": 3181,
+     "h": 4771,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09757",
+     "w": 2817,
+     "h": 4225,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    }
+   ]
+  },
+  {
+   "slug": "korok-2000",
    "title": "Korok bemutatása 3/3",
    "description": "Ide jöhet egy-két mondat az albumról.",
    "cover": "dsc09427",
