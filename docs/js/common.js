@@ -131,3 +131,152 @@ function renderJustified(container, items, opts = {}) {
     raf = requestAnimationFrame(draw);
   }).observe(container);
 }
+
+/* ---------- Mozgás: beúszás görgetéskor ---------- */
+
+const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* A megadott elemek finoman beúsznak, amikor a képernyőre kerülnek.
+   A .reveal osztályt csak innen kapják, így ha a JS nem fut le, a tartalom akkor is látszik. */
+function reveal(nodes) {
+  const list = Array.from(nodes);
+  if (!list.length || !("IntersectionObserver" in window) || prefersReducedMotion()) return;
+  const io = new IntersectionObserver((entries) => {
+    let k = 0;
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      e.target.style.transitionDelay = Math.min(k++, 6) * 90 + "ms"; // egyszerre belépő elemek: lépcsőzetesen
+      e.target.classList.add("in");
+      io.unobserve(e.target);
+    }
+  }, { rootMargin: "0px 0px -6% 0px", threshold: 0.06 });
+  for (const n of list) {
+    n.classList.add("reveal");
+    io.observe(n);
+  }
+}
+
+/* Nyitókép: görgetéskor a kép lassabban mozog (parallax), a szöveg elhalványul */
+function initHeroMotion(hero) {
+  if (!hero || prefersReducedMotion()) return;
+  const img = hero.querySelector(".hero-img");
+  const text = hero.querySelector(".hero-text");
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const y = window.scrollY;
+    const h = hero.offsetHeight;
+    if (y > h) return;
+    if (img) img.style.transform = `translate3d(0, ${(y * 0.22).toFixed(1)}px, 0)`;
+    if (text) {
+      text.style.transform = `translate3d(0, ${(y * 0.12).toFixed(1)}px, 0)`;
+      text.style.opacity = Math.max(0, 1 - y / (h * 0.6)).toFixed(3);
+    }
+  };
+  window.addEventListener("scroll", () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  update();
+}
+
+/* ---------- Egymásba csúszó (masonry) rács: a főoldali Portfolio és az albumoldalak is ezt használják ----------
+   nodes: [{ a: <elem>, ratio: magasság/szélesség }]
+   opciók: colsFor(W) = oszlopok száma, poolFor(W) = megjelenítendő node-ok, keepOrder = a sorrend nagyjából marad
+   Az oszlopok alja pixelre egy szintre esik (a képek szélét emiatt egy hajszálnyit levágjuk). */
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function createMasonry(grid, nodes, opts = {}) {
+  const colsFor = opts.colsFor || ((W) => (W < 600 ? 2 : W < 1000 ? 3 : 4));
+  const poolFor = opts.poolFor || (() => nodes);
+  const keepOrder = !!opts.keepOrder;
+
+  let arrangement = [];   // oszlopok: mindegyikben a node-ok listája
+  let arrKey = "";
+  let lastW = 0, lastVW = 0;
+
+  const layout = () => {
+    const W = grid.clientWidth;
+    const vw = window.innerWidth;
+    if (!W || (W === lastW && vw === lastVW)) return;
+    lastW = W; lastVW = vw;
+
+    const pool = poolFor(W);
+    let cols = Math.max(1, Math.min(colsFor(W), Math.ceil(pool.length / 2)));   // oszloponként legalább ~2 kép
+    const balance = pool.length >= cols * 2 && cols > 1;                         // kevés kép: nincs kiegyenlítés
+
+    const gap = Math.round(Math.min(16, Math.max(8, vw * 0.012)));
+    const offset = balance ? Math.round(Math.min(96, Math.max(28, vw * 0.06))) : 0;   // páros oszlopok lejjebb indulnak
+    const colW = (W - gap * (cols - 1)) / cols;
+    const offsets = Array.from({ length: cols }, (_, i) => (i % 2 ? offset : 0));
+
+    // 1) elrendezés: minden kép a pillanatnyilag legrövidebb oszlopba kerül; sok változatot kipróbálunk,
+    //    és azt tartjuk meg, ahol az oszlopok alja a leginkább egy szintre esik
+    const key = cols + ":" + pool.length;
+    if (key !== arrKey) {
+      arrKey = key;
+      const simulate = (order) => {
+        const heights = offsets.map((o) => o / colW);
+        const colsOut = Array.from({ length: cols }, () => []);
+        order.forEach((n) => {
+          let c = 0;
+          for (let i = 1; i < cols; i++) if (heights[i] < heights[c]) c = i;
+          colsOut[c].push(n);
+          heights[c] += n.ratio + gap / colW;
+        });
+        return { colsOut, spread: Math.max(...heights) - Math.min(...heights) };
+      };
+      let best = simulate(pool);
+      if (keepOrder) {
+        // a sorrendet csak kicsit keverjük: közeli képeket cserélgetünk, amíg jobb nem lesz az alja
+        let order = pool.slice();
+        for (let t = 0; t < 1500 && best.spread > 0.05; t++) {
+          const cand = order.slice();
+          const i = Math.floor(Math.random() * cand.length);
+          const j = Math.min(cand.length - 1, Math.max(0, i + Math.floor(Math.random() * 9) - 4));
+          [cand[i], cand[j]] = [cand[j], cand[i]];
+          const r = simulate(cand);
+          if (r.spread <= best.spread) { best = r; order = cand; }
+        }
+      } else {
+        for (let t = 0; t < 400 && best.spread > 0.05; t++) {
+          const cand = simulate(shuffle(pool.slice()));
+          if (cand.spread < best.spread) best = cand;
+        }
+      }
+      arrangement = best.colsOut;
+      grid.replaceChildren(...arrangement.map((list) => el("div", { class: "pf-col" }, ...list.map((n) => n.a))));
+    }
+
+    // 2) pontos magasságok: minden oszlop alja pixelre ugyanott van
+    grid.style.gap = gap + "px";
+    const colEls = grid.children;
+    const natural = arrangement.map((list) => list.reduce((sum, n) => sum + n.ratio * colW, 0));
+    const bottoms = arrangement.map((list, i) => offsets[i] + natural[i] + gap * (list.length - 1));
+    const B = Math.round(bottoms.reduce((x, y) => x + y, 0) / bottoms.length);
+    arrangement.forEach((list, i) => {
+      const col = colEls[i];
+      col.style.gap = gap + "px";
+      col.style.marginTop = offsets[i] + "px";
+      if (!balance) { list.forEach((n) => (n.a.style.height = Math.round(n.ratio * colW) + "px")); return; }
+      const avail = B - offsets[i] - gap * (list.length - 1);
+      const f = avail / natural[i];
+      let used = 0;
+      list.forEach((n, k) => {
+        const h = k === list.length - 1 ? avail - used : Math.round(n.ratio * colW * f);
+        used += h;
+        n.a.style.height = h + "px";
+      });
+    });
+  };
+
+  layout();
+  let raf = 0;
+  new ResizeObserver(() => { cancelAnimationFrame(raf); raf = requestAnimationFrame(layout); }).observe(grid);
+}

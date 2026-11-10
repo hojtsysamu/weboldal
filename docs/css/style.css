@@ -52,15 +52,23 @@ h1, h2, h3, p { margin: 0; }
   background: var(--panel);
 }
 .hero-img {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  /* a kép magasabb a nyitóképnél, hogy görgetéskor (parallax) ne látsszon üres rés */
+  position: absolute; top: -12%; left: 0; width: 100%; height: 124%; object-fit: cover;
   opacity: 0; transition: opacity 1.4s ease;
+  will-change: transform;
+  animation: heroZoom 24s cubic-bezier(.2,.6,.2,1) both;   /* lassú nagyítás-kicsinyítés betöltéskor */
 }
+@keyframes heroZoom { from { scale: 1.14; } to { scale: 1; } }
 .hero-img.loaded { opacity: 1; }
 .hero::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(to bottom, rgba(17,17,17,.6), rgba(17,17,17,.2) 38%, rgba(17,17,17,.2) 60%, rgba(17,17,17,.85));
 }
-.hero-text { position: relative; z-index: 2; padding: 0 var(--pad); }
+.hero-text {
+  position: relative; z-index: 2; padding: 0 var(--pad); will-change: transform, opacity;
+  animation: rise 1.4s .35s cubic-bezier(.2,.7,.2,1) backwards;
+}
+@keyframes rise { from { opacity: 0; translate: 0 28px; } to { opacity: 1; translate: 0 0; } }
 .hero h1 {
   font-size: clamp(2rem, 6.4vw, 4.6rem); font-weight: 200;
   letter-spacing: .3em; text-indent: .3em; text-transform: uppercase; line-height: 1.15;
@@ -72,6 +80,10 @@ h1, h2, h3, p { margin: 0; }
   margin: 26px auto 0; max-width: 46ch; font-size: .98rem; color: rgba(235,233,229,.82);
 }
 
+/* ---------- Beúszás görgetéskor (a .reveal osztályt a JS adja) ---------- */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .9s ease, transform 1s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+
 /* ---------- Szekciók ---------- */
 .section { padding: clamp(72px, 11vw, 140px) var(--pad); }
 .wrap { max-width: 1400px; margin: 0 auto; }
@@ -81,6 +93,24 @@ h1, h2, h3, p { margin: 0; }
 .about { border-top: 1px solid var(--line); }
 .about .text { max-width: 62ch; color: rgba(235,233,229,.85); }
 .about .text p + p { margin-top: 1.1em; }
+
+/* ---------- Portfolio (egymásba csúszó rács) ---------- */
+.portfolio { --pf-gap: clamp(8px, 1.2vw, 16px); }
+.wrap.wide { max-width: 1700px; }
+.masonry { display: flex; gap: var(--pf-gap); align-items: flex-start; }
+.pf-col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: var(--pf-gap); }
+.pf-item { position: relative; display: block; overflow: hidden; background: var(--panel); }
+button.pf-item { width: 100%; padding: 0; border: 0; cursor: zoom-in; font: inherit; color: inherit; }
+.pf-item img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s, transform 1.4s cubic-bezier(.2,.7,.2,1); }
+.pf-item img.loaded { opacity: 1; }
+.pf-item:hover img.loaded { transform: scale(1.04); }
+.pf-cap {
+  position: absolute; inset: auto 0 0 0; padding: 36px 16px 14px;
+  background: linear-gradient(to top, rgba(0,0,0,.72), transparent);
+  font-size: .78rem; letter-spacing: .2em; text-transform: uppercase;
+  opacity: 0; translate: 0 6px; transition: opacity .3s, translate .3s;
+}
+.pf-item:hover .pf-cap, .pf-item:focus-visible .pf-cap { opacity: 1; translate: 0 0; }
 
 /* ---------- Album kártyák ---------- */
 .albums-grid {
@@ -120,13 +150,13 @@ h1, h2, h3, p { margin: 0; }
 }
 
 /* ---------- Album oldal ---------- */
-.album-head { padding: calc(76px + clamp(40px, 8vw, 100px)) var(--pad) clamp(28px, 5vw, 56px); }
+.album-head { max-width: 1700px; margin: 0 auto; padding: calc(76px + clamp(40px, 8vw, 100px)) var(--pad) clamp(28px, 5vw, 56px); }
 .album-head h1 {
   font-size: clamp(1.8rem, 5vw, 3.4rem); font-weight: 200; letter-spacing: .2em; text-transform: uppercase; line-height: 1.2;
 }
 .album-head p { margin-top: 18px; max-width: 58ch; color: rgba(235,233,229,.8); }
 .album-head .meta { color: var(--muted); font-size: .9rem; margin-top: 10px; }
-.album-body { padding: 0 var(--pad) clamp(56px, 9vw, 110px); }
+.album-body { max-width: 1700px; margin: 0 auto; padding: 0 var(--pad) clamp(56px, 9vw, 110px); }
 .album-nav {
   display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
   padding: 28px var(--pad); border-top: 1px solid var(--line);
@@ -168,14 +198,49 @@ h1, h2, h3, p { margin: 0; }
 }
 body.lb-open { overflow: hidden; }
 
+/* ---------- Filmszemcse (finom, mozgó zaj az egész oldalon) ---------- */
+.grain {
+  position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+  z-index: 90; pointer-events: none; opacity: .075; will-change: transform;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 1s steps(6) infinite;
+}
+@keyframes grain {
+  0%   { transform: translate(0, 0); }
+  17%  { transform: translate(-4%, 3%); }
+  33%  { transform: translate(3%, -5%); }
+  50%  { transform: translate(-5%, -2%); }
+  67%  { transform: translate(4%, 4%); }
+  83%  { transform: translate(-2%, 5%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ---------- Kurzor-kiegészítő (a megszokott egérkurzor megmarad; a JS kapcsolja be) ---------- */
+.cursor-ring {
+  position: fixed; top: 0; left: 0; z-index: 200; pointer-events: none; opacity: 0; transition: opacity .25s;
+}
+body.cursor-on .cursor-ring { opacity: 1; }
+.cursor-ring i {
+  position: absolute; left: 0; top: 0; translate: -50% -50%;
+  display: grid; place-items: center; width: 12px; height: 12px; border-radius: 50%;
+  background: rgba(255,255,255,.85); border: 1px solid transparent;
+  font-style: normal; font-size: .62rem; letter-spacing: .18em; text-indent: .18em; text-transform: uppercase; color: #fff;
+  transition: width .35s cubic-bezier(.2,.7,.2,1), height .35s cubic-bezier(.2,.7,.2,1), background .3s, border-color .3s;
+}
+.cursor-ring.hover i { width: 44px; height: 44px; background: transparent; border-color: rgba(255,255,255,.7); }
+.cursor-ring.photo i { width: 84px; height: 84px; background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.35); }
+.cursor-ring.down i { scale: .85; }
+
 @media (max-width: 640px) {
   .site-header { height: 64px; }
   .brand { font-size: .8rem; letter-spacing: .16em; }
   .nav { font-size: .82rem; gap: 14px; }
+  .nav-extra { display: none; }   /* telefonon nem fér ki a fejlécben */
   .lb-prev, .lb-next { display: none; }   /* telefonon húzással lapozunk */
   .album-head { padding-top: calc(64px + 40px); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { transition-duration: .01ms !important; }
+  .hero-img, .hero-text, .grain { animation: none !important; }
 }

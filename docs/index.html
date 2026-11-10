@@ -14,9 +14,11 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="grain" aria-hidden="true"></div>
   <header class="site-header">
     <a class="brand" href="index.html" data-name>Photographer</a>
     <nav class="nav" aria-label="Main menu">
+      <a class="nav-extra" href="#portfolio">Portfolio</a>
       <a href="#albumok">Albums</a>
       <a href="#rolam">About</a>
       <a href="#kapcsolat">Contact</a>
@@ -32,10 +34,10 @@
       </div>
     </section>
 
-    <section class="section" id="kiemelt">
-      <div class="wrap">
-        <h2 class="section-title">Featured</h2>
-        <div id="featured-grid"></div>
+    <section class="section portfolio" id="portfolio">
+      <div class="wrap wide">
+        <h2 class="section-title">Portfolio</h2>
+        <div class="masonry" id="portfolio-grid"></div>
       </div>
     </section>
 
@@ -67,5 +69,6 @@
   <script src="js/common.js"></script>
   <script src="js/lightbox.js"></script>
   <script src="js/home.js"></script>
+  <script src="js/cursor.js"></script>
 </body>
 </html>

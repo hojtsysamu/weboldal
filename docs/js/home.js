@@ -1,4 +1,6 @@
-/* Főoldal: nyitókép, kiemelt képek, albumok, szövegek a site.json-ból */
+/* Főoldal: nyitókép, Portfolio (egymásba csúszó rács), albumok, szövegek a site.json-ból */
+
+const PORTFOLIO_MAX = 18; // ennyi véletlenszerű kép jelenik meg a Portfolio részben (telefonon legfeljebb 12)
 
 (async function () {
   initHeader();
@@ -61,16 +63,58 @@
     fadeImage(img);
   }
 
-  /* --- kiemelt képek --- */
-  const featSection = document.getElementById("kiemelt");
-  const gridItems = featured.filter((x) => x !== heroItem).slice(0, 6);
-  if (gridItems.length >= 2) {
-    renderJustified(document.getElementById("featured-grid"), gridItems, {
-      onOpen: (i) => lightbox.open(gridItems, i),
-      fillLast: true,
-    });
+  initHeroMotion(hero);
+
+  /* --- Portfolio ---
+     Ha van originals/portfolio mappa, az ott kiválasztott képek jelennek meg (véletlen sorrendben).
+     Ha nincs, az összes albumból véletlenszerűen válogat. */
+  // albumonként keverve, majd körbe-körbe húzva, hogy egy nagy album se nyomja el a többit
+  const pickPortfolio = (max) => {
+    const pools = shuffle(albums.filter((a) => a.photos.length)
+      .map((a) => shuffle(a.photos.map((p) => ({ slug: a.slug, photo: p, album: a })))));
+    const out = [];
+    while (out.length < max && pools.some((q) => q.length)) {
+      for (const q of pools) if (q.length && out.length < max) out.push(q.pop());
+    }
+    return shuffle(out);
+  };
+
+  const albumBySlug = Object.fromEntries(albums.map((a) => [a.slug, a]));
+  const chosen = data.portfolio || [];
+  const limited = !chosen.length;      // true: véletlen válogatás, ilyenkor van darabszám-korlát
+  const pfItems = limited
+    ? pickPortfolio(PORTFOLIO_MAX).map((it) => ({ slug: it.slug, photo: it.photo, link: it.slug, title: it.album.title }))
+    : shuffle(chosen.map((c) => {
+        const alb = c.album ? albumBySlug[c.album] : null;
+        return { slug: "_portfolio", photo: c.photo, link: alb ? alb.slug : null, title: alb ? alb.title : "" };
+      }));
+
+  const pfSection = document.getElementById("portfolio");
+  const pfGrid = document.getElementById("portfolio-grid");
+  if (!pfItems.length) {
+    pfSection.hidden = true;
   } else {
-    featSection.hidden = true;
+    const lbItems = pfItems.filter((it) => !it.link);   // album nélküli képek: nagyban nyílnak meg
+    const nodes = pfItems.map((it) => {
+      const img = fadeImage(el("img", {
+        alt: "", loading: "lazy", decoding: "async",
+        srcset: photoSrcset(it.slug, it.photo),
+        sizes: "(max-width: 600px) 50vw, (max-width: 1000px) 33vw, 25vw",
+        src: photoSrc(it.slug, it.photo, bestSize(it.photo, 800)),
+      }));
+      const a = el("a", {
+        class: "pf-item", href: it.link ? `album.html?a=${it.link}` : "#",
+        "aria-label": it.link ? `Open album: ${it.title}` : "Open photo",
+      }, img, it.link ? el("span", { class: "pf-cap", text: it.title }) : null);
+      if (!it.link) a.addEventListener("click", (e) => { e.preventDefault(); lightbox.open(lbItems, lbItems.indexOf(it)); });
+      return { a, ratio: it.photo.h / it.photo.w, linked: !!it.link };
+    });
+
+    createMasonry(pfGrid, nodes, {
+      colsFor: (W) => (W < 600 ? 2 : W < 1000 ? 3 : 4),
+      poolFor: (W) => (limited ? nodes.slice(0, W < 600 ? Math.min(12, PORTFOLIO_MAX) : PORTFOLIO_MAX) : nodes),
+    });
+    reveal(nodes.map((n) => n.a));
   }
 
   /* --- albumok --- */
@@ -91,6 +135,8 @@
       el("div", { class: "count", text: `${a.photos.length} ${a.photos.length === 1 ? "photo" : "photos"}` }));
     grid.append(el("a", { class: "album-card", href: `album.html?a=${a.slug}` }, img, label));
   });
+  reveal(grid.querySelectorAll(".album-card"));
+  reveal(document.querySelectorAll(".section-title, .about .text, .contact .mail, .contact .social"));
 
   /* Ha az albumoldalról jöttünk (index.html#rolam stb.), a tartalom csak most töltődött be,
      ezért a böngésző elsőre rossz helyre görgetett: itt újra a jó szekcióhoz ugrunk. */

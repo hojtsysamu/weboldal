@@ -33,9 +33,22 @@
   document.getElementById("album-meta").textContent = `${album.photos.length} ${album.photos.length === 1 ? "photo" : "photos"}`;
 
   const items = album.photos.map((p) => ({ slug: album.slug, photo: p }));
-  const grid = el("div");
+  const grid = el("div", { class: "masonry" });
   body.append(grid);
-  renderJustified(grid, items, { onOpen: (i) => lightbox.open(items, i) });
+  const nodes = items.map((it, i) => {
+    const img = fadeImage(el("img", {
+      alt: "", loading: "lazy", decoding: "async",
+      srcset: photoSrcset(it.slug, it.photo),
+      sizes: "(max-width: 640px) 50vw, (max-width: 1700px) 33vw, 520px",
+      src: photoSrc(it.slug, it.photo, bestSize(it.photo, 1200)),
+    }));
+    const btn = el("button", { class: "pf-item", type: "button", "aria-label": "Open photo" }, img);
+    btn.addEventListener("click", () => lightbox.open(items, i));
+    return { a: btn, ratio: it.photo.h / it.photo.w };
+  });
+  // 3 nagy oszlop (nagyon széles képernyőn is, hogy a képek nagyok maradjanak); a sorrend nagyjából megmarad
+  createMasonry(grid, nodes, { colsFor: (W) => (W < 640 ? 2 : W < 1700 ? 3 : 4), keepOrder: true });
+  reveal(nodes.map((n) => n.a));
 
   /* előző / következő album */
   const nav = document.getElementById("album-nav");

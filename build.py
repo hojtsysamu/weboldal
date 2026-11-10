@@ -4,7 +4,8 @@ Feldolgozza az originals/ mappa képeit, és elkészíti a weboldalhoz szükség
 fájlokat a docs/ mappában:
 
   docs/photos/<album>/<kep>-<szelesseg>.webp   (több méretben)
-  docs/albums.json                             (album- és képlista)
+  docs/photos/_portfolio/...                   (a főoldali Portfolio rész képei)
+  docs/albums.json                             (album-, portfolio- és képlista)
 
 Használat:   python build.py            (csak az új/módosított képeket dolgozza fel)
              python build.py --force    (mindent újragenerál)
@@ -32,7 +33,9 @@ HERO_OUT = ROOT / "docs" / "hero"
 WIDTHS = [480, 800, 1200, 1800, 2400]   # ezekben a szélességekben készülnek a képek
 QUALITY = 82                            # WebP minőség (75-90 között érdemes)
 EXTENSIONS = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".webp"}
-FEATURED_DIR = "kedvenc"                # ennek a képei a főoldalon is megjelennek
+PORTFOLIO_DIR = "portfolio"             # originals/portfolio: az itt lévő képek jelennek meg a főoldali Portfolio részben
+PORTFOLIO_SLUG = "_portfolio"
+FEATURED_DIR = "kedvenc"                # ha nincs originals/hero.jpg, ennek az első képe lesz a nyitókép
 
 FORCE = "--force" in sys.argv
 SRGB = ImageCms.createProfile("sRGB")
@@ -182,6 +185,53 @@ def build_album(folder: Path):
     }
 
 
+def build_portfolio(album_slugs):
+    """A főoldali Portfolio rész képei: originals/portfolio/
+         - közvetlenül a mappában lévő kép: kattintásra nagyban nyílik meg
+         - originals/portfolio/<album-neve>/ almappában lévő kép: kattintásra az adott albumra visz
+    """
+    folder = SRC / PORTFOLIO_DIR
+    if not folder.is_dir():
+        return []
+    print("Portfolio (főoldal)")
+    entries = []   # (fájl, album-slug vagy None)
+    for p in sorted(folder.iterdir(), key=lambda x: x.name.lower()):
+        if p.is_file() and p.suffix.lower() in EXTENSIONS:
+            entries.append((p, None))
+        elif p.is_dir():
+            link = slugify(p.name)
+            if link not in album_slugs:
+                print(f"  ! a(z) '{p.name}' almappa neve nem egyezik egyetlen albuméval sem, ezek a képek nagyban nyílnak meg")
+                link = None
+            for q in sorted(p.iterdir(), key=lambda x: x.name.lower()):
+                if q.is_file() and q.suffix.lower() in EXTENSIONS:
+                    entries.append((q, link))
+
+    items, used_ids = [], set()
+    for path, link in entries:
+        base = slugify((link + "-" if link else "") + path.stem)
+        photo_id, n = base, 2
+        while photo_id in used_ids:
+            photo_id, n = f"{base}-{n}", n + 1
+        used_ids.add(photo_id)
+        try:
+            photo = process_photo(path, PORTFOLIO_SLUG, photo_id, False)
+        except Exception as exc:
+            print(f"  ! {path.name} kihagyva: {exc}")
+            continue
+        del photo["featured"]
+        items.append({"photo": photo, "album": link})
+
+    valid = {f"{it['photo']['id']}-{w}.webp" for it in items for w in it["photo"]["sizes"]}
+    for old in (OUT / PORTFOLIO_SLUG).glob("*.webp"):
+        if old.name not in valid:
+            old.unlink()
+            print(f"  - {old.name} törölve (már nincs az originals-ban)")
+    if not items:
+        print("  (nincs kép, a főoldalon az összes albumból véletlenszerűen válogat)")
+    return items
+
+
 def build_hero():
     """A nyitóoldal fix háttérképe: originals/hero.jpg (vagy .png, .webp ...)."""
     src = next((f for f in sorted(SRC.iterdir())
@@ -217,7 +267,7 @@ def main():
         print("          Telepítés: pip install pyyaml\n")
 
     albums = []
-    for folder in sorted(p for p in SRC.iterdir() if p.is_dir()):
+    for folder in sorted(p for p in SRC.iterdir() if p.is_dir() and p.name.lower() != PORTFOLIO_DIR):
         album = build_album(folder)
         if album:
             albums.append(album)
@@ -226,9 +276,11 @@ def main():
     for a in albums:
         del a["order"]
 
+    portfolio = build_portfolio({a["slug"] for a in albums})
+
     # a már nem létező albumok mappáinak törlése
     import shutil
-    keep = {a["slug"] for a in albums}
+    keep = {a["slug"] for a in albums} | ({PORTFOLIO_SLUG} if portfolio else set())
     if OUT.is_dir():
         for d in OUT.iterdir():
             if d.is_dir() and d.name not in keep:
@@ -237,10 +289,10 @@ def main():
 
     JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
     hero = build_hero()
-    JSON_PATH.write_text(json.dumps({"hero": hero, "albums": albums}, ensure_ascii=False, indent=1), encoding="utf-8")
+    JSON_PATH.write_text(json.dumps({"hero": hero, "portfolio": portfolio, "albums": albums}, ensure_ascii=False, indent=1), encoding="utf-8")
 
     total = sum(len(a["photos"]) for a in albums)
-    print(f"\nKész: {len(albums)} album, {total} kép -> docs/albums.json")
+    print(f"\nKész: {len(albums)} album, {total} kép, {len(portfolio)} portfolio-kép -> docs/albums.json")
 
 
 if __name__ == "__main__":
