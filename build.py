@@ -29,6 +29,7 @@ SRC = ROOT / "originals"
 OUT = ROOT / "docs" / "photos"
 JSON_PATH = ROOT / "docs" / "albums.json"
 HERO_OUT = ROOT / "docs" / "hero"
+ABOUT_OUT = ROOT / "docs" / "about"
 
 WIDTHS = [480, 800, 1200, 1800, 2400]   # ezekben a szélességekben készülnek a képek
 QUALITY = 82                            # WebP minőség (75-90 között érdemes)
@@ -232,22 +233,22 @@ def build_portfolio(album_slugs):
     return items
 
 
-def build_hero():
-    """A nyitóoldal fix háttérképe: originals/hero.jpg (vagy .png, .webp ...)."""
+def build_single(stem, out_dir, label):
+    """Egyetlen különálló kép feldolgozása: originals/<stem>.jpg (vagy .png, .webp ...) -> docs/<out_dir>/<stem>-<szélesség>.webp"""
     src = next((f for f in sorted(SRC.iterdir())
-                if f.is_file() and f.stem.lower() == "hero" and f.suffix.lower() in EXTENSIONS), None)
+                if f.is_file() and f.stem.lower() == stem and f.suffix.lower() in EXTENSIONS), None)
     if src is None:
-        if HERO_OUT.is_dir():
+        if out_dir.is_dir():
             import shutil
-            shutil.rmtree(HERO_OUT)
+            shutil.rmtree(out_dir)
         return None
     with Image.open(src) as probe:
         width, height = oriented_size(probe)
     sizes = sizes_for(width)
-    HERO_OUT.mkdir(parents=True, exist_ok=True)
+    out_dir.mkdir(parents=True, exist_ok=True)
     todo = []
     for w in sizes:
-        target = HERO_OUT / f"hero-{w}.webp"
+        target = out_dir / f"{stem}-{w}.webp"
         if FORCE or not target.exists() or target.stat().st_mtime < src.stat().st_mtime:
             todo.append((w, target))
     if todo:
@@ -255,8 +256,18 @@ def build_hero():
         for w, target in todo:
             resized = img if w == img.width else img.resize((w, round(w * img.height / img.width)), Image.LANCZOS)
             resized.save(target, "WEBP", quality=QUALITY, method=6)
-        print(f"  + nyitókép: {src.name}  ({len(todo)} új méret)")
+        print(f"  + {label}: {src.name}  ({len(todo)} új méret)")
     return {"sizes": sizes, "w": width, "h": height}
+
+
+def build_hero():
+    """A nyitóoldal fix háttérképe: originals/hero.jpg"""
+    return build_single("hero", HERO_OUT, "nyitókép")
+
+
+def build_about():
+    """A Rólam rész képe: originals/about.jpg"""
+    return build_single("about", ABOUT_OUT, "rólam-kép")
 
 
 def main():
@@ -289,7 +300,8 @@ def main():
 
     JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
     hero = build_hero()
-    JSON_PATH.write_text(json.dumps({"hero": hero, "portfolio": portfolio, "albums": albums}, ensure_ascii=False, indent=1), encoding="utf-8")
+    about = build_about()
+    JSON_PATH.write_text(json.dumps({"hero": hero, "about": about, "portfolio": portfolio, "albums": albums}, ensure_ascii=False, indent=1), encoding="utf-8")
 
     total = sum(len(a["photos"]) for a in albums)
     print(f"\nKész: {len(albums)} album, {total} kép, {len(portfolio)} portfolio-kép -> docs/albums.json")

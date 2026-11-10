@@ -24,6 +24,20 @@ const PORTFOLIO_MAX = 18; // ennyi véletlenszerű kép jelenik meg a Portfolio 
   (site.about || []).forEach((t) => aboutBox.append(el("p", { text: t })));
   if (!(site.about || []).length) document.getElementById("rolam").hidden = true;
 
+  /* Rólam-kép (originals/about.jpg): a szöveg mellett jelenik meg, ha van ilyen kép */
+  if (data.about) {
+    const sz = data.about.sizes;
+    const pick = sz.find((w) => w >= 1200) || sz[sz.length - 1];
+    const fig = el("figure", { class: "about-photo" }, fadeImage(el("img", {
+      alt: name, loading: "lazy", decoding: "async",
+      srcset: sz.map((w) => `about/about-${w}.webp ${w}w`).join(", "), sizes: "(max-width: 800px) 100vw, 40vw",
+      src: `about/about-${pick}.webp`,
+    })));
+    document.getElementById("about-grid").classList.add("has-photo");
+    document.getElementById("about-grid").prepend(fig);
+    reveal([fig]);
+  }
+
   const mail = document.getElementById("mail");
   if (site.email) { mail.href = "mailto:" + site.email; mail.textContent = site.email; }
   else mail.hidden = true;

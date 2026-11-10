@@ -27,6 +27,10 @@ Készíts egy `originals/portfolio/` mappát, és ide másold azokat a képeket,
 Ha nincs `portfolio` mappa, a főoldal az összes albumból véletlenszerűen válogat (legfeljebb 18 képet).
 Mindig futtasd utána a `python build.py` parancsot.
 
+## Rólam-kép
+Ha van `originals/about.jpg` (vagy `.png`, `.webp`), a `python build.py` után a Rólam szöveg mellett megjelenik.
+Álló (portré) kép a legjobb hozzá, az oldalon kör alakúra vágva látszik, a kép felső-középső része (az arc) marad meg. Ha nincs ilyen kép, csak a szöveg jelenik meg.
+
 ## Kurzor-kiegészítő
 A megszokott egérkurzor megmarad, mellette egy kis pötty úszik utána, képek fölött kiírja: Album / View / Open. A `docs/js/cursor.js` adja (csak egérrel működik, telefonon nem). Kikapcsolás: töröld a
 `<script src="js/cursor.js"></script>` sort az `index.html`-ből és az `album.html`-ből.
