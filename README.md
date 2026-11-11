@@ -2,12 +2,34 @@
 
 ## Egyszeri előkészület
 ```
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
+## Mappaszerkezet: téma → album → képek
+```
+originals/
+  hero.jpg                  <- a főoldal nyitóképe (nem kötelező)
+  about.jpg                 <- a Rólam rész kör alakú képe (nem kötelező)
+  autok/                    <- TÉMA (ez jelenik meg a főoldalon egy széles képként)
+    cover.jpg               <- a téma főoldali képe (nem kötelező, ajánlott: fekvő, 2:1 arányú, pl. 2400×1200 px)
+    theme.yml               <- cím, leírás, sorrend (nem kötelező)
+    early-drift/            <- ALBUM (a téma oldalán jelenik meg)
+      album.yml             <- cím, leírás, borító, sorrend (nem kötelező)
+      01-elso.jpg
+      02-masodik.jpg
+    track-day/
+      ...
+  koncert/
+    gitaros-este/
+      ...
+```
+- A mappák és a témák nevét kisbetűvel, ékezet és szóköz nélkül, kötőjellel érdemes írni (`modell-fotozas`). A szép, ékezetes cím a `theme.yml` / `album.yml` fájlban adható meg.
+- Ha egy témában csak egy album van, a főoldalon a téma képére kattintva egyből az album nyílik meg.
+- Ha nincs `cover.jpg` a téma mappájában, a téma képe az első album borítóképe lesz (ez általában álló kép, ezért a 2:1-es sávban erősen levágva látszik, ezért érdemes külön, 2:1 arányú `cover.jpg`-t adni).
+- Régi szerkezet is működik: ha egy mappában közvetlenül képek vannak, az egyetlen albumos témaként jelenik meg.
+
 ## Új képek feltöltése (minden alkalommal)
-1. Másold a képeket az `originals/<album-neve>/` mappába (új mappa = új album).
-   (Ha nincs `originals/hero.jpg`, a nyitókép az album `kedvenc/` almappájának első képe lesz.)
+1. Másold a képeket a megfelelő `originals/<téma>/<album>/` mappába (új mappa = új téma vagy album).
 2. Futtasd: `python build.py`
 3. Nézd meg helyben: `python -m http.server -d docs 8000` majd böngészőben: http://localhost:8000
 4. Töltsd fel:
@@ -17,27 +39,17 @@ pip install -r requirements.txt
    git push
    ```
 
-## A főoldali Portfolio rész képeinek kiválasztása
-Készíts egy `originals/portfolio/` mappát, és ide másold azokat a képeket, amelyeket a főoldalon látni szeretnél
-(minden betöltéskor véletlen sorrendben jelennek meg). Ez a mappa nem album, nem jelenik meg az Albums részben.
-- Közvetlenül a `portfolio` mappában lévő kép: kattintásra nagyban nyílik meg.
-- `originals/portfolio/<album-neve>/` almappában lévő kép: kattintásra az adott albumra visz
-  (az almappa neve egyezzen az album mappájának nevével, például `portfolio/early-drift/`).
-
-Ha nincs `portfolio` mappa, a főoldal az összes albumból véletlenszerűen válogat (legfeljebb 18 képet).
-Mindig futtasd utána a `python build.py` parancsot.
-
-## Rólam-kép
-Ha van `originals/about.jpg` (vagy `.png`, `.webp`), a `python build.py` után a Rólam szöveg mellett megjelenik.
-Álló (portré) kép a legjobb hozzá, az oldalon kör alakúra vágva látszik, a kép felső-középső része (az arc) marad meg. Ha nincs ilyen kép, csak a szöveg jelenik meg.
+## Nyitókép és Rólam-kép
+- `originals/hero.jpg` (vagy `.png`, `.webp`): a főoldal fix háttérképe. Ha nincs, az első album `kedvenc/` almappájának első képe (vagy borítója) lesz.
+- `originals/about.jpg`: a Rólam szöveg mellett jelenik meg kör alakúra vágva (a kép felső-középső része marad meg). Ha nincs, csak a szöveg látszik.
 
 ## Kurzor-kiegészítő
-A megszokott egérkurzor megmarad, mellette egy kis pötty úszik utána, képek fölött kiírja: Album / View / Open. A `docs/js/cursor.js` adja (csak egérrel működik, telefonon nem). Kikapcsolás: töröld a
-`<script src="js/cursor.js"></script>` sort az `index.html`-ből és az `album.html`-ből.
+A megszokott egérkurzor megmarad, mellette egy kis pötty úszik utána, képek fölött kiírja: Open / View. A `docs/js/cursor.js` adja (csak egérrel működik, telefonon nem). Kikapcsolás: töröld a
+`<script src="js/cursor.js"></script>` sort az `index.html`-ből, a `theme.html`-ből és az `album.html`-ből.
 
 ## Szövegek átírása
 A név, a rövid bemutatkozás, a "Rólam" szöveg és az elérhetőségek a `docs/site.json` fájlban vannak.
-Az albumok címe/leírása/borítója az album mappájában lévő `album.yml` fájlban.
+A témák és albumok címe/leírása/borítója a `theme.yml` és `album.yml` fájlokban.
 
 ## GitHub Pages
 Repo → Settings → Pages → Branch: `main`, mappa: `/docs`.

@@ -1,16 +1,14 @@
-/* Főoldal: nyitókép, Portfolio (egymásba csúszó rács), albumok, szövegek a site.json-ból */
-
-const PORTFOLIO_MAX = 18; // ennyi véletlenszerű kép jelenik meg a Portfolio részben (telefonon legfeljebb 12)
+/* Főoldal: nyitókép, témák (széles borítóképek), rólam, kapcsolat a site.json-ból */
 
 (async function () {
   initHeader();
-  const lightbox = createLightbox();
 
   const [site, data] = await Promise.all([
     getJSON("site.json").catch(() => ({})),
-    getJSON("albums.json").catch(() => ({ albums: [] })),
+    getJSON("albums.json").catch(() => ({ themes: [], albums: [] })),
   ]);
   const albums = data.albums || [];
+  const themes = data.themes || [];
 
   /* --- szövegek --- */
   const name = site.name || "Photographer";
@@ -79,77 +77,29 @@ const PORTFOLIO_MAX = 18; // ennyi véletlenszerű kép jelenik meg a Portfolio 
 
   initHeroMotion(hero);
 
-  /* --- Portfolio ---
-     Ha van originals/portfolio mappa, az ott kiválasztott képek jelennek meg (véletlen sorrendben).
-     Ha nincs, az összes albumból véletlenszerűen válogat. */
-  // albumonként keverve, majd körbe-körbe húzva, hogy egy nagy album se nyomja el a többit
-  const pickPortfolio = (max) => {
-    const pools = shuffle(albums.filter((a) => a.photos.length)
-      .map((a) => shuffle(a.photos.map((p) => ({ slug: a.slug, photo: p, album: a })))));
-    const out = [];
-    while (out.length < max && pools.some((q) => q.length)) {
-      for (const q of pools) if (q.length && out.length < max) out.push(q.pop());
-    }
-    return shuffle(out);
-  };
-
+  /* --- témák: egy-egy széles kép az oldal teljes szélességében; kattintásra a téma albumai nyílnak meg --- */
+  const box = document.getElementById("themes");
   const albumBySlug = Object.fromEntries(albums.map((a) => [a.slug, a]));
-  const chosen = data.portfolio || [];
-  const limited = !chosen.length;      // true: véletlen válogatás, ilyenkor van darabszám-korlát
-  const pfItems = limited
-    ? pickPortfolio(PORTFOLIO_MAX).map((it) => ({ slug: it.slug, photo: it.photo, link: it.slug, title: it.album.title }))
-    : shuffle(chosen.map((c) => {
-        const alb = c.album ? albumBySlug[c.album] : null;
-        return { slug: "_portfolio", photo: c.photo, link: alb ? alb.slug : null, title: alb ? alb.title : "" };
-      }));
-
-  const pfSection = document.getElementById("portfolio");
-  const pfGrid = document.getElementById("portfolio-grid");
-  if (!pfItems.length) {
-    pfSection.hidden = true;
-  } else {
-    const lbItems = pfItems.filter((it) => !it.link);   // album nélküli képek: nagyban nyílnak meg
-    const nodes = pfItems.map((it) => {
-      const img = fadeImage(el("img", {
-        alt: "", loading: "lazy", decoding: "async",
-        srcset: photoSrcset(it.slug, it.photo),
-        sizes: "(max-width: 600px) 50vw, (max-width: 1000px) 33vw, 25vw",
-        src: photoSrc(it.slug, it.photo, bestSize(it.photo, 800)),
-      }));
-      const a = el("a", {
-        class: "pf-item", href: it.link ? `album.html?a=${it.link}` : "#",
-        "aria-label": it.link ? `Open album: ${it.title}` : "Open photo",
-      }, img, it.link ? el("span", { class: "pf-cap", text: it.title }) : null);
-      if (!it.link) a.addEventListener("click", (e) => { e.preventDefault(); lightbox.open(lbItems, lbItems.indexOf(it)); });
-      return { a, ratio: it.photo.h / it.photo.w, linked: !!it.link };
-    });
-
-    createMasonry(pfGrid, nodes, {
-      colsFor: (W) => (W < 600 ? 2 : W < 1000 ? 3 : 4),
-      poolFor: (W) => (limited ? nodes.slice(0, W < 600 ? Math.min(12, PORTFOLIO_MAX) : PORTFOLIO_MAX) : nodes),
-    });
-    reveal(nodes.map((n) => n.a));
+  if (!themes.length) {
+    box.replaceWith(el("p", { class: "message", text: "Nothing here yet. Create a folder in originals/ for each theme, run python build.py, and refresh the page." }));
   }
-
-  /* --- albumok --- */
-  const grid = document.getElementById("albums-grid");
-  if (!albums.length) {
-    grid.replaceWith(el("p", { class: "message",
-      text: "No albums yet. Copy your photos into the originals folder (one subfolder per album), run python build.py, and refresh the page." }));
-  }
-  albums.forEach((a) => {
-    const cover = a.photos.find((p) => p.id === a.cover) || a.photos[0];
+  themes.forEach((t) => {
+    const single = t.albums.length === 1 ? albumBySlug[t.albums[0]] : null;   // egyetlen album: egyből oda visz
+    const href = single ? `album.html?a=${single.slug}` : `theme.html?t=${t.slug}`;
+    const count = single
+      ? `${single.photos.length} ${single.photos.length === 1 ? "photo" : "photos"}`
+      : `${t.albums.length} albums`;
     const img = fadeImage(el("img", {
-      alt: "", loading: "lazy", srcset: photoSrcset(a.slug, cover),
-      sizes: "(max-width: 640px) 100vw, 33vw",
-      src: photoSrc(a.slug, cover, bestSize(cover, 800)),
+      alt: "", loading: "lazy", decoding: "async",
+      srcset: photoSrcset(t.cover.slug, t.cover.photo), sizes: "100vw",
+      src: photoSrc(t.cover.slug, t.cover.photo, bestSize(t.cover.photo, 1800)),
     }));
     const label = el("div", { class: "label" },
-      el("div", { class: "name", text: a.title }),
-      el("div", { class: "count", text: `${a.photos.length} ${a.photos.length === 1 ? "photo" : "photos"}` }));
-    grid.append(el("a", { class: "album-card", href: `album.html?a=${a.slug}` }, img, label));
+      el("div", { class: "name", text: t.title }),
+      el("div", { class: "count", text: count }));
+    box.append(el("a", { class: "theme-card", href, "aria-label": t.title }, img, label));
   });
-  reveal(grid.querySelectorAll(".album-card"));
+  reveal(box.querySelectorAll(".theme-card"));
   reveal(document.querySelectorAll(".section-title, .about .text, .contact .mail, .contact .social"));
 
   /* Ha az albumoldalról jöttünk (index.html#rolam stb.), a tartalom csak most töltődött be,

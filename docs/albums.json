@@ -21,8 +21,521 @@
   "w": 4000,
   "h": 6000
  },
- "portfolio": [],
+ "themes": [
+  {
+   "slug": "cars",
+   "title": "Cars",
+   "description": "",
+   "cover": {
+    "slug": "_themes",
+    "photo": {
+     "id": "cars",
+     "w": 4192,
+     "h": 2096,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ]
+    }
+   },
+   "albums": [
+    "jaguar-shoot",
+    "miata-shoot",
+    "tokoli-drift"
+   ]
+  },
+  {
+   "slug": "clothing-brands",
+   "title": "Clothing Brands",
+   "description": "",
+   "cover": {
+    "slug": "_themes",
+    "photo": {
+     "id": "clothing-brands",
+     "w": 4801,
+     "h": 2400,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ]
+    }
+   },
+   "albums": [
+    "noxera-studio",
+    "noxera-szabad"
+   ]
+  },
+  {
+   "slug": "concerts",
+   "title": "Concerts",
+   "description": "",
+   "cover": {
+    "slug": "_themes",
+    "photo": {
+     "id": "concerts",
+     "w": 4839,
+     "h": 2419,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ]
+    }
+   },
+   "albums": [
+    "elektra-band",
+    "melankolia-band"
+   ]
+  },
+  {
+   "slug": "studio-works",
+   "title": "Studio Works",
+   "description": "",
+   "cover": {
+    "slug": "_themes",
+    "photo": {
+     "id": "studio-works",
+     "w": 4791,
+     "h": 2396,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ]
+    }
+   },
+   "albums": [
+    "korok-60as",
+    "korok-80as",
+    "korok-2000"
+   ]
+  }
+ ],
  "albums": [
+  {
+   "slug": "jaguar-shoot",
+   "title": "Jaguar XK-8",
+   "description": "Ide jöhet egy-két mondat az albumról.",
+   "cover": "dsc-0233",
+   "photos": [
+    {
+     "id": "dsc-0233",
+     "w": 2998,
+     "h": 4527,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0238-edit-2",
+     "w": 4777,
+     "h": 3164,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0242",
+     "w": 4713,
+     "h": 3122,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0244",
+     "w": 4528,
+     "h": 2999,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0259",
+     "w": 4819,
+     "h": 3192,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0268",
+     "w": 4632,
+     "h": 3068,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0280",
+     "w": 2979,
+     "h": 4497,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0284",
+     "w": 4789,
+     "h": 3172,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0291",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0305",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0319-edit",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0321",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0325",
+     "w": 4348,
+     "h": 2880,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    }
+   ],
+   "theme": "cars"
+  },
+  {
+   "slug": "miata-shoot",
+   "title": "Mazda MX-5 Miata",
+   "description": "Ide jöhet egy-két mondat az albumról.",
+   "cover": "dsc-0346",
+   "photos": [
+    {
+     "id": "dsc-0336",
+     "w": 3024,
+     "h": 4565,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0337",
+     "w": 4565,
+     "h": 3024,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0346",
+     "w": 3059,
+     "h": 4619,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0347",
+     "w": 4318,
+     "h": 2860,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0359",
+     "w": 4345,
+     "h": 2878,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0372",
+     "w": 3168,
+     "h": 4783,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0378",
+     "w": 2943,
+     "h": 4444,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0405",
+     "w": 4818,
+     "h": 3191,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0441",
+     "w": 3264,
+     "h": 4928,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    }
+   ],
+   "theme": "cars"
+  },
+  {
+   "slug": "tokoli-drift",
+   "title": "Tököli drift",
+   "description": "Ide jöhet egy-két mondat az albumról.",
+   "cover": "dsc-0154",
+   "photos": [
+    {
+     "id": "dsc-0154",
+     "w": 2961,
+     "h": 4470,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0159",
+     "w": 4410,
+     "h": 2921,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0174",
+     "w": 2012,
+     "h": 1333,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0196",
+     "w": 4765,
+     "h": 3156,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-0244",
+     "w": 1756,
+     "h": 2651,
+     "sizes": [
+      480,
+      800,
+      1200
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-6193",
+     "w": 6016,
+     "h": 4000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-6239",
+     "w": 4193,
+     "h": 2788,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc-6249",
+     "w": 3293,
+     "h": 4953,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    }
+   ],
+   "theme": "cars"
+  },
   {
    "slug": "noxera-studio",
    "title": "Clothing brand Noxera",
@@ -198,7 +711,8 @@
      ],
      "featured": false
     }
-   ]
+   ],
+   "theme": "clothing-brands"
   },
   {
    "slug": "noxera-szabad",
@@ -388,7 +902,8 @@
      ],
      "featured": false
     }
-   ]
+   ],
+   "theme": "clothing-brands"
   },
   {
    "slug": "elektra-band",
@@ -526,762 +1041,8 @@
      ],
      "featured": false
     }
-   ]
-  },
-  {
-   "slug": "jaguar-shoot",
-   "title": "Jaguar XK-8",
-   "description": "Ide jöhet egy-két mondat az albumról.",
-   "cover": "dsc-0233",
-   "photos": [
-    {
-     "id": "dsc-0233",
-     "w": 2998,
-     "h": 4527,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0238-edit-2",
-     "w": 4777,
-     "h": 3164,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0242",
-     "w": 4713,
-     "h": 3122,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0244",
-     "w": 4528,
-     "h": 2999,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0259",
-     "w": 4819,
-     "h": 3192,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0268",
-     "w": 4632,
-     "h": 3068,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0280",
-     "w": 2979,
-     "h": 4497,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0284",
-     "w": 4789,
-     "h": 3172,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0291",
-     "w": 3264,
-     "h": 4928,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0305",
-     "w": 3264,
-     "h": 4928,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0319-edit",
-     "w": 3264,
-     "h": 4928,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0321",
-     "w": 3264,
-     "h": 4928,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0325",
-     "w": 4348,
-     "h": 2880,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    }
-   ]
-  },
-  {
-   "slug": "korok-60as",
-   "title": "Korok bemutatása 3/1",
-   "description": "Ide jöhet egy-két mondat az albumról.",
-   "cover": "dsc09622",
-   "photos": [
-    {
-     "id": "dsc09523",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09530",
-     "w": 3394,
-     "h": 5091,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09559",
-     "w": 3377,
-     "h": 5065,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09562",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09577",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09583",
-     "w": 3325,
-     "h": 4987,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09607",
-     "w": 3919,
-     "h": 5879,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09622",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09631",
-     "w": 6000,
-     "h": 4000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09645",
-     "w": 3411,
-     "h": 5117,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09653",
-     "w": 3648,
-     "h": 5472,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    }
-   ]
-  },
-  {
-   "slug": "korok-80as",
-   "title": "Korok bemutatása 3/2",
-   "description": "Ide jöhet egy-két mondat az albumról.",
-   "cover": "dsc09707",
-   "photos": [
-    {
-     "id": "dsc09673",
-     "w": 6000,
-     "h": 4000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09684",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09689",
-     "w": 3203,
-     "h": 4805,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09694",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09700",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09703",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09707",
-     "w": 3394,
-     "h": 5091,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09723",
-     "w": 2927,
-     "h": 4390,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09728",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09731",
-     "w": 3515,
-     "h": 5273,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09734",
-     "w": 3377,
-     "h": 5065,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09746",
-     "w": 3181,
-     "h": 4771,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09757",
-     "w": 2817,
-     "h": 4225,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    }
-   ]
-  },
-  {
-   "slug": "korok-2000",
-   "title": "Korok bemutatása 3/3",
-   "description": "Ide jöhet egy-két mondat az albumról.",
-   "cover": "dsc09427",
-   "photos": [
-    {
-     "id": "2000svogue-2",
-     "w": 5400,
-     "h": 7200,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09410",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09412-edit",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09427",
-     "w": 2990,
-     "h": 4485,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09431",
-     "w": 3585,
-     "h": 5377,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09463-edit",
-     "w": 3951,
-     "h": 2634,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09473-edit",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09475-edit",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc09485-edit",
-     "w": 4000,
-     "h": 6000,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    }
-   ]
-  },
-  {
-   "slug": "miata-shoot",
-   "title": "Mazda MX-5 Miata",
-   "description": "Ide jöhet egy-két mondat az albumról.",
-   "cover": "dsc-0346",
-   "photos": [
-    {
-     "id": "dsc-0336",
-     "w": 3024,
-     "h": 4565,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0337",
-     "w": 4565,
-     "h": 3024,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0346",
-     "w": 3059,
-     "h": 4619,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0347",
-     "w": 4318,
-     "h": 2860,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0359",
-     "w": 4345,
-     "h": 2878,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0372",
-     "w": 3168,
-     "h": 4783,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0378",
-     "w": 2943,
-     "h": 4444,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0405",
-     "w": 4818,
-     "h": 3191,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0441",
-     "w": 3264,
-     "h": 4928,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800,
-      2400
-     ],
-     "featured": false
-    }
-   ]
+   ],
+   "theme": "concerts"
   },
   {
    "slug": "melankolia-band",
@@ -1536,18 +1297,19 @@
      ],
      "featured": false
     }
-   ]
+   ],
+   "theme": "concerts"
   },
   {
-   "slug": "tokoli-drift",
-   "title": "Tököli drift",
+   "slug": "korok-60as",
+   "title": "Korok bemutatása 3/1",
    "description": "Ide jöhet egy-két mondat az albumról.",
-   "cover": "dsc-0154",
+   "cover": "dsc09622",
    "photos": [
     {
-     "id": "dsc-0154",
-     "w": 2961,
-     "h": 4470,
+     "id": "dsc09523",
+     "w": 4000,
+     "h": 6000,
      "sizes": [
       480,
       800,
@@ -1558,9 +1320,9 @@
      "featured": false
     },
     {
-     "id": "dsc-0159",
-     "w": 4410,
-     "h": 2921,
+     "id": "dsc09530",
+     "w": 3394,
+     "h": 5091,
      "sizes": [
       480,
       800,
@@ -1571,21 +1333,9 @@
      "featured": false
     },
     {
-     "id": "dsc-0174",
-     "w": 2012,
-     "h": 1333,
-     "sizes": [
-      480,
-      800,
-      1200,
-      1800
-     ],
-     "featured": false
-    },
-    {
-     "id": "dsc-0196",
-     "w": 4765,
-     "h": 3156,
+     "id": "dsc09559",
+     "w": 3377,
+     "h": 5065,
      "sizes": [
       480,
       800,
@@ -1596,19 +1346,73 @@
      "featured": false
     },
     {
-     "id": "dsc-0244",
-     "w": 1756,
-     "h": 2651,
+     "id": "dsc09562",
+     "w": 4000,
+     "h": 6000,
      "sizes": [
       480,
       800,
-      1200
+      1200,
+      1800,
+      2400
      ],
      "featured": false
     },
     {
-     "id": "dsc-6193",
-     "w": 6016,
+     "id": "dsc09577",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09583",
+     "w": 3325,
+     "h": 4987,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09607",
+     "w": 3919,
+     "h": 5879,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09622",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09631",
+     "w": 6000,
      "h": 4000,
      "sizes": [
       480,
@@ -1620,9 +1424,9 @@
      "featured": false
     },
     {
-     "id": "dsc-6239",
-     "w": 4193,
-     "h": 2788,
+     "id": "dsc09645",
+     "w": 3411,
+     "h": 5117,
      "sizes": [
       480,
       800,
@@ -1633,9 +1437,9 @@
      "featured": false
     },
     {
-     "id": "dsc-6249",
-     "w": 3293,
-     "h": 4953,
+     "id": "dsc09653",
+     "w": 3648,
+     "h": 5472,
      "sizes": [
       480,
       800,
@@ -1645,7 +1449,312 @@
      ],
      "featured": false
     }
-   ]
+   ],
+   "theme": "studio-works"
+  },
+  {
+   "slug": "korok-80as",
+   "title": "Korok bemutatása 3/2",
+   "description": "Ide jöhet egy-két mondat az albumról.",
+   "cover": "dsc09707",
+   "photos": [
+    {
+     "id": "dsc09673",
+     "w": 6000,
+     "h": 4000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09684",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09689",
+     "w": 3203,
+     "h": 4805,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09694",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09700",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09703",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09707",
+     "w": 3394,
+     "h": 5091,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09723",
+     "w": 2927,
+     "h": 4390,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09728",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09731",
+     "w": 3515,
+     "h": 5273,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09734",
+     "w": 3377,
+     "h": 5065,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09746",
+     "w": 3181,
+     "h": 4771,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09757",
+     "w": 2817,
+     "h": 4225,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    }
+   ],
+   "theme": "studio-works"
+  },
+  {
+   "slug": "korok-2000",
+   "title": "Korok bemutatása 3/3",
+   "description": "Ide jöhet egy-két mondat az albumról.",
+   "cover": "dsc09427",
+   "photos": [
+    {
+     "id": "2000svogue-2",
+     "w": 5400,
+     "h": 7200,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09410",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09412-edit",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09427",
+     "w": 2990,
+     "h": 4485,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09431",
+     "w": 3585,
+     "h": 5377,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09463-edit",
+     "w": 3951,
+     "h": 2634,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09473-edit",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09475-edit",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    },
+    {
+     "id": "dsc09485-edit",
+     "w": 4000,
+     "h": 6000,
+     "sizes": [
+      480,
+      800,
+      1200,
+      1800,
+      2400
+     ],
+     "featured": false
+    }
+   ],
+   "theme": "studio-works"
   }
  ]
 }

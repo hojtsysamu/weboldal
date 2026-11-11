@@ -1,4 +1,4 @@
-/* Albumoldal: az album.html?a=<mappa-neve> címről tölti be az adott albumot */
+/* Albumoldal: az album.html?a=<album-neve> címről tölti be az adott albumot */
 
 (async function () {
   initHeader();
@@ -7,25 +7,35 @@
   const slug = new URLSearchParams(location.search).get("a");
   const [site, data] = await Promise.all([
     getJSON("site.json").catch(() => ({})),
-    getJSON("albums.json").catch(() => ({ albums: [] })),
+    getJSON("albums.json").catch(() => ({ themes: [], albums: [] })),
   ]);
-  const albums = data.albums || [];
+  const allAlbums = data.albums || [];
+  const themes = data.themes || [];
   const name = site.name || "Photographer";
   document.querySelectorAll("[data-name]").forEach((n) => (n.textContent = name));
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  const idx = albums.findIndex((a) => a.slug === slug);
+  const found = allAlbums.find((a) => a.slug === slug);
   const body = document.getElementById("album-body");
 
-  if (idx < 0) {
+  if (!found) {
     document.title = name;
     document.getElementById("album-title").textContent = "Album not found";
     body.append(el("p", { class: "message" }, "This album does not exist. ",
-      el("a", { href: "index.html#albumok", text: "Back to albums" })));
+      el("a", { href: "index.html#work", text: "Back to work" })));
     return;
   }
 
-  const album = albums[idx];
+  const album = found;
+  // a téma albumai (egymás közti lapozáshoz) és a vissza-link
+  const theme = themes.find((t) => t.slug === album.theme);
+  const albums = allAlbums.filter((a) => a.theme === album.theme);
+  const idx = albums.findIndex((a) => a.slug === album.slug);
+  const back = document.getElementById("album-back");
+  if (theme && theme.albums.length > 1) {
+    back.href = `theme.html?t=${theme.slug}`;
+    back.textContent = "← " + theme.title;
+  }
   document.title = `${album.title} – ${name}`;
   document.getElementById("album-title").textContent = album.title;
   const desc = document.getElementById("album-desc");
@@ -50,7 +60,7 @@
   createMasonry(grid, nodes, { colsFor: (W) => (W < 640 ? 2 : W < 1700 ? 3 : 4), keepOrder: true });
   reveal(nodes.map((n) => n.a));
 
-  /* előző / következő album */
+  /* előző / következő album (ugyanabban a témában) */
   const nav = document.getElementById("album-nav");
   const prev = albums[(idx - 1 + albums.length) % albums.length];
   const next = albums[(idx + 1) % albums.length];

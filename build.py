@@ -4,8 +4,10 @@ Feldolgozza az originals/ mappa képeit, és elkészíti a weboldalhoz szükség
 fájlokat a docs/ mappában:
 
   docs/photos/<album>/<kep>-<szelesseg>.webp   (több méretben)
-  docs/photos/_portfolio/...                   (a főoldali Portfolio rész képei)
-  docs/albums.json                             (album-, portfolio- és képlista)
+  docs/photos/_themes/...                      (a főoldali témák széles borítóképei)
+  docs/albums.json                             (témák, albumok és képek listája)
+
+Szerkezet:  originals/<téma>/<album>/<képek>
 
 Használat:   python build.py            (csak az új/módosított képeket dolgozza fel)
              python build.py --force    (mindent újragenerál)
@@ -34,8 +36,7 @@ ABOUT_OUT = ROOT / "docs" / "about"
 WIDTHS = [480, 800, 1200, 1800, 2400]   # ezekben a szélességekben készülnek a képek
 QUALITY = 82                            # WebP minőség (75-90 között érdemes)
 EXTENSIONS = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".webp"}
-PORTFOLIO_DIR = "portfolio"             # originals/portfolio: az itt lévő képek jelennek meg a főoldali Portfolio részben
-PORTFOLIO_SLUG = "_portfolio"
+THEMES_SLUG = "_themes"                 # a témák borítóképeinek mappája a docs/photos alatt
 FEATURED_DIR = "kedvenc"                # ha nincs originals/hero.jpg, ennek az első képe lesz a nyitókép
 
 FORCE = "--force" in sys.argv
@@ -115,13 +116,13 @@ def process_photo(path: Path, album_slug: str, photo_id: str, featured: bool):
     return {"id": photo_id, "w": width, "h": height, "sizes": sizes, "featured": featured}
 
 
-def read_meta(folder: Path) -> dict:
-    meta_file = folder / "album.yml"
+def read_meta(folder: Path, filename: str) -> dict:
+    meta_file = folder / filename
     if meta_file.exists() and yaml is not None:
         try:
             return yaml.safe_load(meta_file.read_text(encoding="utf-8")) or {}
         except Exception as exc:
-            print(f"  ! album.yml hiba ({folder.name}): {exc}")
+            print(f"  ! {filename} hiba ({folder.name}): {exc}")
     return {}
 
 
@@ -139,10 +140,9 @@ def collect_images(folder: Path):
     return sorted(files.values(), key=lambda item: item[0].name.lower())
 
 
-def build_album(folder: Path):
-    print(f"Album: {folder.name}")
-    meta = read_meta(folder)
-    slug = slugify(folder.name)
+def build_album(folder: Path, slug: str):
+    print(f"  Album: {folder.name}")
+    meta = read_meta(folder, "album.yml")
 
     photos = []
     used_ids = set()
@@ -186,51 +186,75 @@ def build_album(folder: Path):
     }
 
 
-def build_portfolio(album_slugs):
-    """A főoldali Portfolio rész képei: originals/portfolio/
-         - közvetlenül a mappában lévő kép: kattintásra nagyban nyílik meg
-         - originals/portfolio/<album-neve>/ almappában lévő kép: kattintásra az adott albumra visz
-    """
-    folder = SRC / PORTFOLIO_DIR
-    if not folder.is_dir():
-        return []
-    print("Portfolio (főoldal)")
-    entries = []   # (fájl, album-slug vagy None)
-    for p in sorted(folder.iterdir(), key=lambda x: x.name.lower()):
-        if p.is_file() and p.suffix.lower() in EXTENSIONS:
-            entries.append((p, None))
-        elif p.is_dir():
-            link = slugify(p.name)
-            if link not in album_slugs:
-                print(f"  ! a(z) '{p.name}' almappa neve nem egyezik egyetlen albuméval sem, ezek a képek nagyban nyílnak meg")
-                link = None
-            for q in sorted(p.iterdir(), key=lambda x: x.name.lower()):
-                if q.is_file() and q.suffix.lower() in EXTENSIONS:
-                    entries.append((q, link))
+def is_image(p: Path) -> bool:
+    return p.is_file() and p.suffix.lower() in EXTENSIONS
 
-    items, used_ids = [], set()
-    for path, link in entries:
-        base = slugify((link + "-" if link else "") + path.stem)
-        photo_id, n = base, 2
-        while photo_id in used_ids:
-            photo_id, n = f"{base}-{n}", n + 1
-        used_ids.add(photo_id)
-        try:
-            photo = process_photo(path, PORTFOLIO_SLUG, photo_id, False)
-        except Exception as exc:
-            print(f"  ! {path.name} kihagyva: {exc}")
-            continue
+
+def build_theme(folder: Path, theme_slug: str, used_slugs: set):
+    """Egy téma: originals/<téma>/ . Az almappái az albumok (régi szerkezet: ha a mappában közvetlenül képek vannak,
+    az egyetlen albumos téma lesz). Opcionális: theme.yml és cover.jpg (a főoldali széles borítókép)."""
+    print(f"Téma: {folder.name}")
+    meta = read_meta(folder, "theme.yml")
+
+    def album_slug(name: str) -> str:
+        base = slugify(name)
+        slug, n = base, 2
+        if slug in used_slugs:
+            slug = f"{theme_slug}-{base}"
+        while slug in used_slugs:
+            slug, n = f"{theme_slug}-{base}-{n}", n + 1
+        used_slugs.add(slug)
+        return slug
+
+    loose = [p for p in sorted(folder.iterdir()) if is_image(p) and p.stem.lower() != "cover"]
+    albums = []
+    if loose:
+        # régi szerkezet: a mappa maga az album
+        album = build_album(folder, album_slug(folder.name))
+        if album:
+            albums.append(album)
+    else:
+        for sub in sorted(d for d in folder.iterdir() if d.is_dir() and d.name != FEATURED_DIR and d.name[0] not in "._"):
+            album = build_album(sub, album_slug(sub.name))
+            if album:
+                albums.append(album)
+    if not albums:
+        print("  (nincs album, kihagyva)")
+        return None
+
+    albums.sort(key=lambda a: (a["order"], a["title"].lower()))
+    for a in albums:
+        a["theme"] = theme_slug
+
+    # borítókép: cover.jpg a téma mappájában > theme.yml 'cover' > az első album borítója
+    cover = None
+    cover_file = next((p for p in sorted(folder.iterdir()) if is_image(p) and p.stem.lower() == "cover"), None)
+    if cover_file:
+        photo = process_photo(cover_file, THEMES_SLUG, theme_slug, False)
         del photo["featured"]
-        items.append({"photo": photo, "album": link})
+        cover = {"slug": THEMES_SLUG, "photo": photo}
+    elif meta.get("cover"):
+        wanted = slugify(Path(str(meta["cover"])).stem)
+        for a in albums:
+            for ph in a["photos"]:
+                if ph["id"] == wanted and cover is None:
+                    cover = {"slug": a["slug"], "photo": ph}
+        if cover is None:
+            print(f"  ! a megadott borítókép nem található: {meta['cover']}")
+    if cover is None:
+        first = albums[0]
+        ph = next((x for x in first["photos"] if x["id"] == first["cover"]), first["photos"][0])
+        cover = {"slug": first["slug"], "photo": ph}
 
-    valid = {f"{it['photo']['id']}-{w}.webp" for it in items for w in it["photo"]["sizes"]}
-    for old in (OUT / PORTFOLIO_SLUG).glob("*.webp"):
-        if old.name not in valid:
-            old.unlink()
-            print(f"  - {old.name} törölve (már nincs az originals-ban)")
-    if not items:
-        print("  (nincs kép, a főoldalon az összes albumból véletlenszerűen válogat)")
-    return items
+    title = meta.get("title") or (albums[0]["title"] if loose else pretty_title(folder.name))
+    desc = meta.get("description") or (albums[0]["description"] if loose else "")
+    return {
+        "theme": {
+            "slug": theme_slug, "title": str(title), "description": str(desc),
+            "cover": cover, "order": meta.get("order", 1000), "albums": [a["slug"] for a in albums],
+        },
+        "albums": albums,
+    }
 
 
 def build_single(stem, out_dir, label):
@@ -274,37 +298,51 @@ def main():
     if not SRC.is_dir():
         sys.exit("Nem találom az originals/ mappát. A build.py mellett kell lennie.")
     if yaml is None:
-        print("Figyelem: a pyyaml nincs telepítve, az album.yml fájlok figyelmen kívül maradnak.")
+        print("Figyelem: a pyyaml nincs telepítve, a theme.yml és album.yml fájlok figyelmen kívül maradnak.")
         print("          Telepítés: pip install pyyaml\n")
 
-    albums = []
-    for folder in sorted(p for p in SRC.iterdir() if p.is_dir() and p.name.lower() != PORTFOLIO_DIR):
-        album = build_album(folder)
-        if album:
-            albums.append(album)
+    themes, used_album_slugs, used_theme_slugs = [], set(), set()
+    for folder in sorted(p for p in SRC.iterdir() if p.is_dir() and p.name[0] not in "._"):
+        if folder.name.lower() == "portfolio":
+            print("Megjegyzés: a régi 'portfolio' mappa már nem különleges, sima témaként kezeli. Ha nem kell, töröld.")
+        theme_slug, n = slugify(folder.name), 2
+        while theme_slug in used_theme_slugs:
+            theme_slug, n = f"{slugify(folder.name)}-{n}", n + 1
+        used_theme_slugs.add(theme_slug)
+        result = build_theme(folder, theme_slug, used_album_slugs)
+        if result:
+            themes.append(result)
 
-    albums.sort(key=lambda a: (a["order"], a["title"].lower()))
-    for a in albums:
-        del a["order"]
+    themes.sort(key=lambda t: (t["theme"]["order"], t["theme"]["title"].lower()))
+    theme_list = [t["theme"] for t in themes]
+    albums = [a for t in themes for a in t["albums"]]
+    for x in theme_list + albums:
+        del x["order"]
 
-    portfolio = build_portfolio({a["slug"] for a in albums})
-
-    # a már nem létező albumok mappáinak törlése
+    # a már nem létező albumok / témaborítók törlése a weboldalról
     import shutil
-    keep = {a["slug"] for a in albums} | ({PORTFOLIO_SLUG} if portfolio else set())
+    uses_themes_dir = any(t["cover"]["slug"] == THEMES_SLUG for t in theme_list)
+    keep = {a["slug"] for a in albums} | ({THEMES_SLUG} if uses_themes_dir else set())
     if OUT.is_dir():
         for d in OUT.iterdir():
             if d.is_dir() and d.name not in keep:
                 shutil.rmtree(d)
-                print(f"Album törölve a weboldalról: {d.name}")
+                print(f"Törölve a weboldalról: {d.name}")
+    if uses_themes_dir:
+        valid = {f"{t['cover']['photo']['id']}-{w}.webp" for t in theme_list if t["cover"]["slug"] == THEMES_SLUG
+                 for w in t["cover"]["photo"]["sizes"]}
+        for old in (OUT / THEMES_SLUG).glob("*.webp"):
+            if old.name not in valid:
+                old.unlink()
 
     JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
     hero = build_hero()
     about = build_about()
-    JSON_PATH.write_text(json.dumps({"hero": hero, "about": about, "portfolio": portfolio, "albums": albums}, ensure_ascii=False, indent=1), encoding="utf-8")
+    JSON_PATH.write_text(json.dumps({"hero": hero, "about": about, "themes": theme_list, "albums": albums},
+                                    ensure_ascii=False, indent=1), encoding="utf-8")
 
     total = sum(len(a["photos"]) for a in albums)
-    print(f"\nKész: {len(albums)} album, {total} kép, {len(portfolio)} portfolio-kép -> docs/albums.json")
+    print(f"\nKész: {len(theme_list)} téma, {len(albums)} album, {total} kép -> docs/albums.json")
 
 
 if __name__ == "__main__":
